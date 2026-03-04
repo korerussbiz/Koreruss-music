@@ -118,127 +118,6 @@ Every view, click, share & purchase generates revenue | All referral codes visib
 </div>
 
 <div class="section" style="background:linear-gradient(135deg,rgba(29,185,84,0.2),rgba(29,185,84,0.05));border:3px solid #1db954">
-<h2><i class="fas fa-coins"></i> NEW: NFT MUSIC COLLECTION</h2>
-<p style="text-align:center;font-size:1.2em;margin-bottom:25px"><strong>🎵 Own Exclusive Music NFTs</strong><br><small>Limited edition tracks on blockchain - Collect, trade, earn royalties!</small></p>
-
-<div class="grid">
-<div class="card" style="border:2px solid #1db954">
-<i class="fas fa-gem" style="font-size:2.5em;color:#1db954;margin-bottom:15px"></i>
-<h3>NFT Track #001</h3>
-<p>Exclusive unreleased track<br>Only 10 editions available</p>
-<div class="price">0.05 ETH</div>
-<small>~$100 USD</small><br>
-<a href="mailto:korerussbiz@gmail.com?subject=NFT%20Purchase" target="_blank" class="btn btn-buy"><i class="fas fa-shopping-cart"></i> Buy NFT</a>
-</div>
-<div class="card" style="border:2px solid #f7931a">
-<i class="fas fa-crown" style="font-size:2.5em;color:#f7931a;margin-bottom:15px"></i>
-<h3>VIP NFT Pass</h3>
-<p>Lifetime access to all releases<br>+ Exclusive perks</p>
-<div class="price">0.5 ETH</div>
-<small>~$1,000 USD</small><br>
-<a href="mailto:korerussbiz@gmail.com?subject=VIP%20NFT%20Pass" target="_blank" class="btn btn-buy"><i class="fas fa-shopping-cart"></i> Buy Pass</a>
-</div>
-<div class="card" style="border:2px solid #667eea">
-<i class="fas fa-palette" style="font-size:2.5em;color:#667eea;margin-bottom:15px"></i>
-<h3>Custom NFT</h3>
-<p>Commission a custom track<br>Minted as your NFT</p>
-<div class="price">Custom</div>
-<small>Starting at 1 ETH</small><br>
-<a href="mailto:korerussbiz@gmail.com?subject=Custom%20NFT%20Commission" class="btn"><i class="fas fa-envelope"></i> Contact</a>
-</div>
-</div>
-</div>
-
-<div class="section">
-<h2><i class="fas fa-graduation-cap"></i> BEAT LICENSING & SERVICES</h2>
-<div class="grid">
-<div class="card">
-<i class="fas fa-music" style="font-size:2.5em;color:#1db954;margin-bottom:15px"></i>
-<h3>Basic License</h3>
-<p class="price">$50</p>
-<p>MP3 lease<br>Up to 5,000 streams<br>Non-exclusive rights</p>
-<a href="https://www.paypal.me/KoreyRussell809/50" target="_blank" class="btn btn-buy"><i class="fas fa-cart-plus"></i> Buy License</a>
-</div>
-<div class="card">
-<i class="fas fa-star" style="font-size:2.5em;color:#f7931a;margin-bottom:15px"></i>
-<h3>Premium License</h3>
-<p class="price">$200</p>
-<p>WAV + Stems<br>Up to 50,000 streams<br>Trackout files included</p>
-<a href="https://www.paypal.me/KoreyRussell809/200" target="_blank" class="btn btn-buy"><i class="fas fa-cart-plus"></i> Buy License</a>
-</div>
-<div class="card" style="border:3px solid #f7931a">
-<i class="fas fa-crown" style="font-size:2.5em;color:#ff6b35;margin-bottom:15px"></i>
-<h3>Exclusive Rights</h3>
-<p class="price">$1,000</p>
-<p>Full ownership<br>Unlimited use<br>Beat removed from sale</p>
-<a href="mailto:korerussbiz@gmail.com?subject=Exclusive%20Rights%20Purchase" class="btn"><i class="fas fa-envelope"></i> Contact</a>
-</div>
-</div>
-
-<div style="margin-top:30px;text-align:center">
-<h3 style="color:#f7931a;margin-bottom:15px">Professional Services</h3>
-<div class="grid">
-<div class="card">
-<h4>Mixing</h4>
-<p class="price">$100</p>
-<small>per track</small>
-</div>
-<div class="card">
-<h4>Mastering</h4>
-<p class="price">$50</p>
-<small>per track</small>
-</div>
-<div class="card">
-<h4>Full Production</h4>
-<p class="price">$500+</p>
-<small>custom quote</small>
-</div>
-</div>
-<a href="mailto:korerussbiz@gmail.com?subject=Service%20Inquiry" class="btn" style="font-size:1.1em;padding:15px 40px"><i class="fas fa-envelope"></i> Get Quote</a>
-</div>
-</div>
-
-<div class="section">
-<h2><i class="fab fa-patreon"></i> SUPPORT ON PATREON</h2>
-<p style="text-align:center;font-size:1.2em;margin-bottom:25px">Get exclusive content, early releases, and direct access</p>
-<div class="grid">
-<div class="card">
-<h3>Fan Tier</h3>
-<p class="price">$5/mo</p>
-<ul class="feature-list">
-<li>Early access to releases</li>
-<li>Behind-the-scenes content</li>
-<li>Discord access</li>
-<li>Monthly Q&A</li>
-</ul>
-<a href="https://www.patreon.com/koreruss" target="_blank" class="btn btn-buy"><i class="fab fa-patreon"></i> Join Patreon</a>
-</div>
-<div class="card" style="border:2px solid #f7931a">
-<h3>Producer Tier</h3>
-<p class="price">$25/mo</p>
-<ul class="feature-list">
-<li>Everything in Fan tier</li>
-<li>Free beat lease monthly</li>
-<li>Production tutorials</li>
-<li>Sample packs</li>
-</ul>
-<a href="https://www.patreon.com/koreruss" target="_blank" class="btn btn-buy"><i class="fab fa-patreon"></i> Join Patreon</a>
-</div>
-<div class="card" style="border:3px solid #f7931a">
-<h3>VIP Tier</h3>
-<p class="price">$100/mo</p>
-<ul class="feature-list">
-<li>Everything in Producer tier</li>
-<li>1-on-1 mentorship call</li>
-<li>Custom beat monthly</li>
-<li>Project file access</li>
-</ul>
-<a href="https://www.patreon.com/koreruss" target="_blank" class="btn btn-buy"><i class="fab fa-patreon"></i> Join Patreon</a>
-</div>
-</div>
-</div>
-
-<div class="section" style="background:linear-gradient(135deg,rgba(29,185,84,0.2),rgba(29,185,84,0.05));border:3px solid #1db954">
 <h2><i class="fas fa-gift"></i> FREE OFFERS - EARN REWARDS</h2>
 <p style="text-align:center;font-size:1.2em;margin-bottom:25px"><strong>🎁 Get FREE Music, Crypto & More!</strong><br><small>Complete offers below - I earn from ads, you get rewards!</small></p>
 
@@ -308,101 +187,6 @@ Every view, click, share & purchase generates revenue | All referral codes visib
 	document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/3a250a252f65294cd6db694d6e4c3edc/invoke.js"></scr' + 'ipt>');
 </script>
 </div>
-
-<div class="section">
-<h2><i class="fas fa-headphones"></i> 🎵 MY MUSIC - 203 SONGS STREAMING LIVE</h2>
-<p style="text-align:center;margin-bottom:20px;font-size:1.3em"><strong>🎵 203 Original Tracks Playing Random</strong> | External SD: 193 songs | Internal SD: 10 songs</p>
-
-<div style="background:#1a1a1a;padding:20px;border-radius:15px;margin-bottom:20px;border:2px solid #1db954">
-<h3 style="color:#1db954;margin-bottom:15px"><i class="fas fa-play-circle"></i> 🎵 Auto-Playing Random Songs</h3>
-<div id="currentSong" style="margin-bottom:15px;padding:15px;background:#2a2a2a;border-radius:10px">
-<div style="color:#f7931a;font-size:18px;margin-bottom:10px">⏳ Loading 203 songs...</div>
-</div>
-<audio id="mainPlayer" controls autoplay style="width:100%;margin-bottom:15px"></audio>
-<div style="text-align:center;margin-bottom:15px">
-<button class="btn btn-play" onclick="playRandom()"><i class="fas fa-random"></i> Random Song</button>
-<button class="btn btn-play" onclick="playNext()"><i class="fas fa-forward"></i> Next</button>
-<button class="btn btn-buy" onclick="showAllSongs()"><i class="fas fa-list"></i> View All 203 Songs</button>
-</div>
-<div id="songList" style="max-height:400px;overflow-y:auto;display:none"></div>
-</div>
-
-<div style="background:rgba(247,147,26,0.2);padding:15px;border-radius:10px;border:2px solid #f7931a;margin-bottom:20px;text-align:center">
-<strong style="color:#f7931a">🎵 Direct Server Access:</strong>
-<a href="https://ancient-swan-53.loca.lt" target="_blank" style="color:#fff;font-size:16px;text-decoration:underline;display:block;margin:10px 0">https://ancient-swan-53.loca.lt</a>
-<small style="opacity:0.8">API: /api/songs | Random: /api/random | Stream: /stream/</small>
-</div>
-
-<div style="text-align:center;margin-top:30px">
-<a href="https://open.spotify.com/search/koreruss" target="_blank" class="btn" style="font-size:1.1em;padding:15px 40px"><i class="fab fa-spotify"></i> Spotify</a>
-<a href="https://youtube.com/results?search_query=koreruss" target="_blank" class="btn" style="font-size:1.1em;padding:15px 40px"><i class="fab fa-youtube"></i> YouTube</a>
-<a href="https://distrokid.com/vip/seven/5424203" target="_blank" class="btn btn-buy" style="font-size:1.1em;padding:15px 40px"><i class="fas fa-link"></i> All Platforms</a>
-</div>
-</div>
-
-<script>
-const MUSIC_SERVER = 'https://ancient-swan-53.loca.lt';
-let allSongs = [];
-let currentIndex = 0;
-
-// Load all songs
-fetch(MUSIC_SERVER + '/api/songs', {
-  headers: { 'Bypass-Tunnel-Reminder': 'true' }
-})
-  .then(r => r.json())
-  .then(data => {
-    allSongs = data.songs;
-    document.getElementById('currentSong').innerHTML = `<div style="color:#1db954">✅ ${data.count} songs loaded - Auto-playing random!</div>`;
-    playRandom();
-  })
-  .catch(e => {
-    document.getElementById('currentSong').innerHTML = `<div style="color:#ff6b35">⚠️ Music server offline. <a href="${MUSIC_SERVER}" target="_blank" style="color:#f7931a">Click here to access directly</a></div>`;
-  });
-
-function playRandom() {
-  if (allSongs.length === 0) return;
-  currentIndex = Math.floor(Math.random() * allSongs.length);
-  playSong(currentIndex);
-}
-
-function playNext() {
-  if (allSongs.length === 0) return;
-  currentIndex = (currentIndex + 1) % allSongs.length;
-  playSong(currentIndex);
-}
-
-function playSong(index) {
-  const song = allSongs[index];
-  const player = document.getElementById('mainPlayer');
-  player.src = MUSIC_SERVER + song.url;
-  player.play().catch(e => console.log('Autoplay blocked - click play button'));
-  document.getElementById('currentSong').innerHTML = `
-    <div style="color:#f7931a;font-size:18px;margin-bottom:5px"><i class="fas fa-music"></i> Now Playing:</div>
-    <div style="font-size:16px">${song.name}</div>
-    <div style="font-size:12px;opacity:0.7;margin-top:5px">Song ${index + 1} of ${allSongs.length}</div>
-  `;
-}
-
-function showAllSongs() {
-  const list = document.getElementById('songList');
-  if (list.style.display === 'none') {
-    list.innerHTML = allSongs.map((song, i) => `
-      <div style="background:#2a2a2a;padding:12px;margin:8px 0;border-radius:8px;cursor:pointer;border:2px solid transparent" 
-           onmouseover="this.style.borderColor='#1db954'" 
-           onmouseout="this.style.borderColor='transparent'"
-           onclick="currentIndex=${i};playSong(${i})">
-        <strong style="color:#1db954">${i + 1}.</strong> ${song.name}
-      </div>
-    `).join('');
-    list.style.display = 'block';
-  } else {
-    list.style.display = 'none';
-  }
-}
-
-// Auto-play next song when current ends
-document.getElementById('mainPlayer').addEventListener('ended', playNext);
-</script>
 
 <div class="section">
 <h2><i class="fas fa-film"></i> FREE MOVIES - 1950s to 2026</h2>
@@ -478,15 +262,20 @@ const movieChannels = [
 function loadRandomMovie(slot) {
   const channel = movieChannels[Math.floor(Math.random() * movieChannels.length)];
   const videoId = channel.videos[Math.floor(Math.random() * channel.videos.length)];
-  const iframe = `<iframe src="https://www.youtube.com/embed/${videoId}" style="width:100%;height:100%;border:0" allowfullscreen></iframe>`;
+  const iframe = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" style="width:100%;height:100%;border:0" allowfullscreen allow="autoplay"></iframe>`;
   document.getElementById('randomMovie' + slot).innerHTML = iframe;
 }
 
-// Load random movies on page load (NO AUTOPLAY)
+// Load random movies on page load
 window.addEventListener('load', () => {
   loadRandomMovie(1);
   loadRandomMovie(2);
   loadRandomMovie(3);
+  
+  // Auto-rotate movies every 5 minutes
+  setInterval(() => {
+    loadRandomMovie(Math.floor(Math.random() * 3) + 1);
+  }, 5 * 60 * 1000);
 });
 </script>
 <div class="video-grid">
@@ -522,6 +311,101 @@ window.addEventListener('load', () => {
 </div>
 </div>
 </div>
+
+<div class="section">
+<h2><i class="fas fa-headphones"></i> MY MUSIC - 203 SONGS STREAMING LIVE</h2>
+<p style="text-align:center;margin-bottom:20px">🎵 <strong>203 Original Tracks</strong> | External SD: 193 songs | Internal SD: 10 songs</p>
+
+<div style="background:#1a1a1a;padding:20px;border-radius:15px;margin-bottom:20px;border:2px solid #1db954">
+<h3 style="color:#1db954;margin-bottom:15px"><i class="fas fa-play-circle"></i> 🎵 Live Music Player - 203 Tracks</h3>
+<div id="currentSong" style="margin-bottom:15px;padding:15px;background:#2a2a2a;border-radius:10px">
+<div style="color:#f7931a;font-size:18px;margin-bottom:10px">⏳ Loading 203 songs...</div>
+</div>
+<audio id="mainPlayer" controls style="width:100%;margin-bottom:15px"></audio>
+<div style="text-align:center;margin-bottom:15px">
+<button class="btn btn-play" onclick="playRandom()"><i class="fas fa-random"></i> Random Song</button>
+<button class="btn btn-play" onclick="playNext()"><i class="fas fa-forward"></i> Next</button>
+<button class="btn btn-buy" onclick="showAllSongs()"><i class="fas fa-list"></i> View All 203 Songs</button>
+</div>
+<div id="songList" style="max-height:400px;overflow-y:auto;display:none"></div>
+</div>
+
+<div style="background:rgba(247,147,26,0.2);padding:15px;border-radius:10px;border:2px solid #f7931a;margin-bottom:20px;text-align:center">
+<strong style="color:#f7931a">🎵 Direct Server Access:</strong>
+<a href="https://ancient-swan-53.loca.lt" target="_blank" style="color:#fff;font-size:16px;text-decoration:underline;display:block;margin:10px 0">https://ancient-swan-53.loca.lt</a>
+<small style="opacity:0.8">API: /api/songs | Random: /api/random | Stream: /stream/</small>
+</div>
+
+<div style="text-align:center;margin-top:30px">
+<a href="https://open.spotify.com/search/koreruss" target="_blank" class="btn" style="font-size:1.1em;padding:15px 40px"><i class="fab fa-spotify"></i> Spotify</a>
+<a href="https://youtube.com/results?search_query=koreruss" target="_blank" class="btn" style="font-size:1.1em;padding:15px 40px"><i class="fab fa-youtube"></i> YouTube</a>
+<a href="https://distrokid.com/vip/seven/5424203" target="_blank" class="btn btn-buy" style="font-size:1.1em;padding:15px 40px"><i class="fas fa-link"></i> All Platforms</a>
+</div>
+</div>
+
+<script>
+const MUSIC_SERVER = 'https://ancient-swan-53.loca.lt';
+let allSongs = [];
+let currentIndex = 0;
+
+// Load all songs
+fetch(MUSIC_SERVER + '/api/songs', {
+  headers: { 'Bypass-Tunnel-Reminder': 'true' }
+})
+  .then(r => r.json())
+  .then(data => {
+    allSongs = data.songs;
+    document.getElementById('currentSong').innerHTML = `<div style="color:#1db954">✅ ${data.count} songs loaded and ready!</div>`;
+    playRandom();
+  })
+  .catch(e => {
+    document.getElementById('currentSong').innerHTML = `<div style="color:#ff6b35">⚠️ Music server offline. <a href="${MUSIC_SERVER}" target="_blank" style="color:#f7931a">Click here to access directly</a></div>`;
+  });
+
+function playRandom() {
+  if (allSongs.length === 0) return;
+  currentIndex = Math.floor(Math.random() * allSongs.length);
+  playSong(currentIndex);
+}
+
+function playNext() {
+  if (allSongs.length === 0) return;
+  currentIndex = (currentIndex + 1) % allSongs.length;
+  playSong(currentIndex);
+}
+
+function playSong(index) {
+  const song = allSongs[index];
+  const player = document.getElementById('mainPlayer');
+  player.src = MUSIC_SERVER + song.url;
+  player.play();
+  document.getElementById('currentSong').innerHTML = `
+    <div style="color:#f7931a;font-size:18px;margin-bottom:5px"><i class="fas fa-music"></i> Now Playing:</div>
+    <div style="font-size:16px">${song.name}</div>
+    <div style="font-size:12px;opacity:0.7;margin-top:5px">Song ${index + 1} of ${allSongs.length}</div>
+  `;
+}
+
+function showAllSongs() {
+  const list = document.getElementById('songList');
+  if (list.style.display === 'none') {
+    list.innerHTML = allSongs.map((song, i) => `
+      <div style="background:#2a2a2a;padding:12px;margin:8px 0;border-radius:8px;cursor:pointer;border:2px solid transparent" 
+           onmouseover="this.style.borderColor='#1db954'" 
+           onmouseout="this.style.borderColor='transparent'"
+           onclick="currentIndex=${i};playSong(${i})">
+        <strong style="color:#1db954">${i + 1}.</strong> ${song.name}
+      </div>
+    `).join('');
+    list.style.display = 'block';
+  } else {
+    list.style.display = 'none';
+  }
+}
+
+// Auto-play next song when current ends
+document.getElementById('mainPlayer').addEventListener('ended', playNext);
+</script>
 
 <div class="section" style="border:4px solid #f7931a">
 <h2><i class="fas fa-shopping-cart"></i> BUY EXCLUSIVE CONTENT</h2>
