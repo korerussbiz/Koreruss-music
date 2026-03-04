@@ -316,16 +316,10 @@ window.addEventListener('load', () => {
 <h2><i class="fas fa-headphones"></i> MY MUSIC - 203 SONGS STREAMING LIVE</h2>
 <p style="text-align:center;margin-bottom:20px">🎵 <strong>203 Original Tracks</strong> | External SD: 193 songs | Internal SD: 10 songs</p>
 
-<div style="background:rgba(247,147,26,0.2);padding:15px;border-radius:10px;border:2px solid #f7931a;margin-bottom:20px;text-align:center">
-<strong style="color:#f7931a">🎵 Direct Music Server Access:</strong><br>
-<a href="https://koreruss-music.loca.lt" target="_blank" style="color:#fff;font-size:18px;text-decoration:underline">https://koreruss-music.loca.lt</a><br>
-<small style="opacity:0.8">Click to access all 203 songs directly | API: /api/songs | Random: /api/random</small>
-</div>
-
 <div style="background:#1a1a1a;padding:20px;border-radius:15px;margin-bottom:20px;border:2px solid #1db954">
-<h3 style="color:#1db954;margin-bottom:15px"><i class="fas fa-play-circle"></i> Live Music Player</h3>
+<h3 style="color:#1db954;margin-bottom:15px"><i class="fas fa-play-circle"></i> 🎵 Live Music Player - 203 Tracks</h3>
 <div id="currentSong" style="margin-bottom:15px;padding:15px;background:#2a2a2a;border-radius:10px">
-<div style="color:#f7931a;font-size:18px;margin-bottom:10px">Loading songs...</div>
+<div style="color:#f7931a;font-size:18px;margin-bottom:10px">⏳ Loading 203 songs...</div>
 </div>
 <audio id="mainPlayer" controls style="width:100%;margin-bottom:15px"></audio>
 <div style="text-align:center;margin-bottom:15px">
@@ -336,15 +330,21 @@ window.addEventListener('load', () => {
 <div id="songList" style="max-height:400px;overflow-y:auto;display:none"></div>
 </div>
 
+<div style="background:rgba(247,147,26,0.2);padding:15px;border-radius:10px;border:2px solid #f7931a;margin-bottom:20px;text-align:center">
+<strong style="color:#f7931a">🎵 Direct Server Access:</strong>
+<a href="https://ancient-swan-53.loca.lt" target="_blank" style="color:#fff;font-size:16px;text-decoration:underline;display:block;margin:10px 0">https://ancient-swan-53.loca.lt</a>
+<small style="opacity:0.8">API: /api/songs | Random: /api/random | Stream: /stream/</small>
+</div>
+
 <div style="text-align:center;margin-top:30px">
-<a href="https://open.spotify.com/search/koreruss" target="_blank" class="btn" style="font-size:1.1em;padding:15px 40px"><i class="fab fa-spotify"></i> Stream on Spotify</a>
-<a href="https://youtube.com/results?search_query=koreruss" target="_blank" class="btn" style="font-size:1.1em;padding:15px 40px"><i class="fab fa-youtube"></i> YouTube Music</a>
+<a href="https://open.spotify.com/search/koreruss" target="_blank" class="btn" style="font-size:1.1em;padding:15px 40px"><i class="fab fa-spotify"></i> Spotify</a>
+<a href="https://youtube.com/results?search_query=koreruss" target="_blank" class="btn" style="font-size:1.1em;padding:15px 40px"><i class="fab fa-youtube"></i> YouTube</a>
 <a href="https://distrokid.com/vip/seven/5424203" target="_blank" class="btn btn-buy" style="font-size:1.1em;padding:15px 40px"><i class="fas fa-link"></i> All Platforms</a>
 </div>
 </div>
 
 <script>
-const MUSIC_SERVER = 'https://koreruss-music.loca.lt';
+const MUSIC_SERVER = 'https://ancient-swan-53.loca.lt';
 let allSongs = [];
 let currentIndex = 0;
 
