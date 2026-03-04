@@ -305,112 +305,90 @@ window.addEventListener('load', () => {
 </div>
 
 <div class="section">
-<h2><i class="fas fa-headphones"></i> MY MUSIC - STREAM NOW</h2>
-<p style="text-align:center;margin-bottom:20px">🎵 <strong>3 Original Tracks Available</strong> | Stream or Buy for $4.99 each</p>
+<h2><i class="fas fa-headphones"></i> MY MUSIC - 203 SONGS STREAMING LIVE</h2>
+<p style="text-align:center;margin-bottom:20px">🎵 <strong>203 Original Tracks</strong> | External SD: 193 songs | Internal SD: 10 songs</p>
 
-<div style="background:#1a1a1a;padding:20px;border-radius:15px;margin-bottom:20px">
-<h3 style="color:#f7931a;margin-bottom:15px"><i class="fas fa-play-circle"></i> Audio Player - All Tracks</h3>
+<div style="background:#1a1a1a;padding:20px;border-radius:15px;margin-bottom:20px;border:2px solid #1db954">
+<h3 style="color:#1db954;margin-bottom:15px"><i class="fas fa-play-circle"></i> Live Music Player</h3>
+<div id="currentSong" style="margin-bottom:15px;padding:15px;background:#2a2a2a;border-radius:10px">
+<div style="color:#f7931a;font-size:18px;margin-bottom:10px">Loading songs...</div>
+</div>
 <audio id="mainPlayer" controls style="width:100%;margin-bottom:15px"></audio>
-<div id="trackList" style="display:grid;gap:10px"></div>
+<div style="text-align:center;margin-bottom:15px">
+<button class="btn btn-play" onclick="playRandom()"><i class="fas fa-random"></i> Random Song</button>
+<button class="btn btn-play" onclick="playNext()"><i class="fas fa-forward"></i> Next</button>
+<button class="btn btn-buy" onclick="showAllSongs()"><i class="fas fa-list"></i> View All 203 Songs</button>
+</div>
+<div id="songList" style="max-height:400px;overflow-y:auto;display:none"></div>
 </div>
 
-<div class="song-list">
-<div class="song-item">
-<div class="song-info">
-<h4><i class="fas fa-music"></i> Track 1 - Koreruss Original</h4>
-<p>Original Production | 2025</p>
-<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1234567890&color=%23f7931a&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
-</div>
-<div class="song-actions">
-<a href="https://www.paypal.me/KoreyRussell809/4.99" target="_blank" class="btn btn-buy"><i class="fas fa-cart-plus"></i> $4.99</a>
-</div>
-</div>
-<div class="song-item">
-<div class="song-info">
-<h4><i class="fas fa-music"></i> Track 2 - Koreruss Beat</h4>
-<p>Hip Hop Production | 2025</p>
-<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1234567891&color=%23f7931a&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
-</div>
-<div class="song-actions">
-<a href="https://www.paypal.me/KoreyRussell809/4.99" target="_blank" class="btn btn-buy"><i class="fas fa-cart-plus"></i> $4.99</a>
-</div>
-</div>
-<div class="song-item">
-<div class="song-info">
-<h4><i class="fas fa-music"></i> Track 3 - Koreruss Mix</h4>
-<p>Electronic Mix | 2025</p>
-<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1234567892&color=%23f7931a&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
-</div>
-<div class="song-actions">
-<a href="https://www.paypal.me/KoreyRussell809/4.99" target="_blank" class="btn btn-buy"><i class="fas fa-cart-plus"></i> $4.99</a>
-</div>
-</div>
-<div class="song-item">
-<div class="song-info">
-<h4><i class="fas fa-music"></i> More Tracks on Spotify</h4>
-<p>Stream full catalog online</p>
-</div>
-<div class="song-actions">
-<a href="https://open.spotify.com/search/koreruss" target="_blank" class="btn btn-play"><i class="fab fa-spotify"></i> Spotify</a>
-<a href="https://youtube.com/results?search_query=koreruss" target="_blank" class="btn btn-play"><i class="fab fa-youtube"></i> YouTube</a>
-</div>
-</div>
-</div>
 <div style="text-align:center;margin-top:30px">
-<a href="https://open.spotify.com/search/koreruss" target="_blank" class="btn" style="font-size:1.1em;padding:15px 40px"><i class="fab fa-spotify"></i> Stream All on Spotify</a>
+<a href="https://open.spotify.com/search/koreruss" target="_blank" class="btn" style="font-size:1.1em;padding:15px 40px"><i class="fab fa-spotify"></i> Stream on Spotify</a>
 <a href="https://youtube.com/results?search_query=koreruss" target="_blank" class="btn" style="font-size:1.1em;padding:15px 40px"><i class="fab fa-youtube"></i> YouTube Music</a>
 <a href="https://distrokid.com/vip/seven/5424203" target="_blank" class="btn btn-buy" style="font-size:1.1em;padding:15px 40px"><i class="fas fa-link"></i> All Platforms</a>
 </div>
 </div>
 
 <script>
-// Load all tracks from manifest
-fetch('music/manifest.json')
+const MUSIC_SERVER = 'https://koreruss-music.loca.lt';
+let allSongs = [];
+let currentIndex = 0;
+
+// Load all songs
+fetch(MUSIC_SERVER + '/api/songs')
   .then(r => r.json())
-  .then(tracks => {
-    const player = document.getElementById('mainPlayer');
-    const trackList = document.getElementById('trackList');
-    let currentTrack = 0;
-    
-    tracks.forEach((track, i) => {
-      const div = document.createElement('div');
-      div.style.cssText = 'background:#2a2a2a;padding:12px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;border:2px solid transparent';
-      div.innerHTML = `
-        <div>
-          <strong style="color:#f7931a">${i+1}. ${track.name}</strong>
-        </div>
-        <div style="display:flex;gap:8px">
-          <button class="btn" style="font-size:11px;padding:8px 15px" onclick="event.stopPropagation()">
-            <a href="https://www.paypal.me/KoreyRussell809/4.99" target="_blank" style="color:#000;text-decoration:none">$4.99</a>
-          </button>
-        </div>
-      `;
-      div.onclick = () => {
-        currentTrack = i;
-        player.src = 'music/' + track.file;
-        player.play();
-        document.querySelectorAll('#trackList > div').forEach(d => d.style.borderColor = 'transparent');
-        div.style.borderColor = '#f7931a';
-      };
-      trackList.appendChild(div);
-    });
-    
-    // Auto-play first track
-    if(tracks.length > 0) {
-      player.src = 'music/' + tracks[0].file;
-      trackList.children[0].style.borderColor = '#f7931a';
-    }
-    
-    // Auto-next
-    player.onended = () => {
-      currentTrack = (currentTrack + 1) % tracks.length;
-      player.src = 'music/' + tracks[currentTrack].file;
-      player.play();
-      document.querySelectorAll('#trackList > div').forEach((d,i) => {
-        d.style.borderColor = i === currentTrack ? '#f7931a' : 'transparent';
-      });
-    };
+  .then(data => {
+    allSongs = data.songs;
+    document.getElementById('currentSong').innerHTML = `<div style="color:#1db954">✅ ${data.count} songs loaded and ready!</div>`;
+    playRandom();
+  })
+  .catch(e => {
+    document.getElementById('currentSong').innerHTML = `<div style="color:#ff6b35">⚠️ Music server offline. Click to retry.</div>`;
   });
+
+function playRandom() {
+  if (allSongs.length === 0) return;
+  currentIndex = Math.floor(Math.random() * allSongs.length);
+  playSong(currentIndex);
+}
+
+function playNext() {
+  if (allSongs.length === 0) return;
+  currentIndex = (currentIndex + 1) % allSongs.length;
+  playSong(currentIndex);
+}
+
+function playSong(index) {
+  const song = allSongs[index];
+  const player = document.getElementById('mainPlayer');
+  player.src = MUSIC_SERVER + song.url;
+  player.play();
+  document.getElementById('currentSong').innerHTML = `
+    <div style="color:#f7931a;font-size:18px;margin-bottom:5px"><i class="fas fa-music"></i> Now Playing:</div>
+    <div style="font-size:16px">${song.name}</div>
+    <div style="font-size:12px;opacity:0.7;margin-top:5px">Song ${index + 1} of ${allSongs.length}</div>
+  `;
+}
+
+function showAllSongs() {
+  const list = document.getElementById('songList');
+  if (list.style.display === 'none') {
+    list.innerHTML = allSongs.map((song, i) => `
+      <div style="background:#2a2a2a;padding:12px;margin:8px 0;border-radius:8px;cursor:pointer;border:2px solid transparent" 
+           onmouseover="this.style.borderColor='#1db954'" 
+           onmouseout="this.style.borderColor='transparent'"
+           onclick="currentIndex=${i};playSong(${i})">
+        <strong style="color:#1db954">${i + 1}.</strong> ${song.name}
+      </div>
+    `).join('');
+    list.style.display = 'block';
+  } else {
+    list.style.display = 'none';
+  }
+}
+
+// Auto-play next song when current ends
+document.getElementById('mainPlayer').addEventListener('ended', playNext);
 </script>
 
 <div class="section" style="border:4px solid #f7931a">
