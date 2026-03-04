@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koreruss Music - 203 Songs Streaming</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#0a0a0a,#1a1a2e);color:#fff;line-height:1.6}
+.container{max-width:1400px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#667eea,#764ba2);padding:60px 20px;text-align:center;border-radius:20px;margin-bottom:30px}
+.header h1{font-size:3.5em;margin-bottom:15px}
+.nav{background:#1a1a1a;padding:15px;border-radius:10px;margin-bottom:20px;text-align:center}
+.nav a{color:#f7931a;text-decoration:none;padding:10px 20px;margin:0 10px;display:inline-block;border-radius:5px;transition:all 0.3s}
+.nav a:hover{background:#f7931a;color:#000}
+.section{background:rgba(26,26,26,0.9);padding:40px;border-radius:20px;margin:30px 0;border:1px solid rgba(247,147,26,0.2)}
+.section h2{font-size:2.5em;margin-bottom:25px;color:#f7931a;border-bottom:3px solid #f7931a;padding-bottom:15px}
+.player-fixed{position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;padding:20px;box-shadow:0 -5px 20px rgba(0,0,0,0.5);z-index:1000;border-top:3px solid #1db954}
+.player-content{max-width:1400px;margin:0 auto}
+.current-track{color:#f7931a;font-size:18px;margin-bottom:10px}
+.controls{display:flex;gap:10px;justify-content:center;margin-top:15px;flex-wrap:wrap}
+.btn{background:linear-gradient(135deg,#f7931a,#ff9f1a);color:#000;border:none;padding:12px 25px;border-radius:25px;font-size:14px;font-weight:bold;cursor:pointer;transition:all 0.3s}
+.btn:hover{transform:scale(1.05)}
+.btn-play{background:linear-gradient(135deg,#1db954,#1ed760)}
+.song-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:15px;margin:20px 0}
+.song-card{background:#2a2a2a;padding:15px;border-radius:10px;cursor:pointer;border:2px solid transparent;transition:all 0.3s}
+.song-card:hover{border-color:#1db954;transform:translateY(-3px)}
+.song-card.playing{border-color:#f7931a;background:#3a3a3a}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<h1><i class="fas fa-music"></i> KORERUSS MUSIC</h1>
+<p style="font-size:1.4em">203 Original Tracks Streaming Live</p>
+</div>
+
+<div class="nav">
+<a href="index.html"><i class="fas fa-home"></i> Home</a>
+<a href="music.html" style="background:#f7931a;color:#000"><i class="fas fa-music"></i> Music</a>
+<a href="movies.html"><i class="fas fa-film"></i> Movies</a>
+<a href="korerussbiz.html"><i class="fas fa-robot"></i> Bot Services</a>
+</div>
+
+<div class="section">
+<h2><i class="fas fa-headphones"></i> All 203 Songs</h2>
+<p style="text-align:center;margin-bottom:20px">Click any song to play | Player stays active across pages</p>
+<div id="songGrid" class="song-grid">
+<div style="text-align:center;padding:40px;color:#f7931a">
+<i class="fas fa-spinner fa-spin" style="font-size:3em"></i>
+<p style="margin-top:20px">Loading 203 songs...</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="player-fixed">
+<div class="player-content">
+<div id="currentTrack" class="current-track">
+<i class="fas fa-music"></i> Loading music player...
+</div>
+<audio id="musicPlayer" controls style="width:100%"></audio>
+<div class="controls">
+<button class="btn btn-play" onclick="playRandom()"><i class="fas fa-random"></i> Random</button>
+<button class="btn btn-play" onclick="playPrevious()"><i class="fas fa-backward"></i> Previous</button>
+<button class="btn btn-play" onclick="playNext()"><i class="fas fa-forward"></i> Next</button>
+<button class="btn" onclick="toggleMute()"><i class="fas fa-volume-up" id="volumeIcon"></i> Volume</button>
+</div>
+</div>
+</div>
+
+<script src="player.js"></script>
+<script>
+// Load and display all songs
+loadSongs().then(() => {
+  const grid = document.getElementById('songGrid');
+  grid.innerHTML = allSongs.map((song, i) => `
+    <div class="song-card" onclick="playSongByIndex(${i})" id="song-${i}">
+      <div style="color:#1db954;font-weight:bold;margin-bottom:5px">${i + 1}. ${song.name}</div>
+      <div style="font-size:12px;opacity:0.7">Click to play</div>
+    </div>
+  `).join('');
+});
+</script>
+
+</body>
+</html>
