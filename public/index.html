@@ -308,6 +308,12 @@ window.addEventListener('load', () => {
 <h2><i class="fas fa-headphones"></i> MY MUSIC - 203 SONGS STREAMING LIVE</h2>
 <p style="text-align:center;margin-bottom:20px">🎵 <strong>203 Original Tracks</strong> | External SD: 193 songs | Internal SD: 10 songs</p>
 
+<div style="background:rgba(247,147,26,0.2);padding:15px;border-radius:10px;border:2px solid #f7931a;margin-bottom:20px;text-align:center">
+<strong style="color:#f7931a">🎵 Direct Music Server Access:</strong><br>
+<a href="https://koreruss-music.loca.lt" target="_blank" style="color:#fff;font-size:18px;text-decoration:underline">https://koreruss-music.loca.lt</a><br>
+<small style="opacity:0.8">Click to access all 203 songs directly | API: /api/songs | Random: /api/random</small>
+</div>
+
 <div style="background:#1a1a1a;padding:20px;border-radius:15px;margin-bottom:20px;border:2px solid #1db954">
 <h3 style="color:#1db954;margin-bottom:15px"><i class="fas fa-play-circle"></i> Live Music Player</h3>
 <div id="currentSong" style="margin-bottom:15px;padding:15px;background:#2a2a2a;border-radius:10px">
@@ -335,7 +341,9 @@ let allSongs = [];
 let currentIndex = 0;
 
 // Load all songs
-fetch(MUSIC_SERVER + '/api/songs')
+fetch(MUSIC_SERVER + '/api/songs', {
+  headers: { 'Bypass-Tunnel-Reminder': 'true' }
+})
   .then(r => r.json())
   .then(data => {
     allSongs = data.songs;
@@ -343,7 +351,7 @@ fetch(MUSIC_SERVER + '/api/songs')
     playRandom();
   })
   .catch(e => {
-    document.getElementById('currentSong').innerHTML = `<div style="color:#ff6b35">⚠️ Music server offline. Click to retry.</div>`;
+    document.getElementById('currentSong').innerHTML = `<div style="color:#ff6b35">⚠️ Music server offline. <a href="${MUSIC_SERVER}" target="_blank" style="color:#f7931a">Click here to access directly</a></div>`;
   });
 
 function playRandom() {
