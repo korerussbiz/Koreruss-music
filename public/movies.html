@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Koreruss Movies - Free Streaming</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="sidebar.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#0a0a0a,#1a1a2e);color:#fff;line-height:1.6;padding-bottom:150px}
@@ -33,6 +34,36 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-g
 </style>
 </head>
 <body>
+
+<button class="sidebar-toggle" onclick="toggleSidebar()">
+  <i class="fas fa-bars"></i>
+</button>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <h2><i class="fas fa-music"></i> KORERUSS</h2>
+    <p>Music Producer | BMI Member</p>
+  </div>
+  
+  <ul class="sidebar-menu">
+    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="music.html"><i class="fas fa-music"></i> Music (203)</a></li>
+    <li><a href="movies.html" class="active"><i class="fas fa-film"></i> Movies</a></li>
+    <li><a href="korerussbiz.html"><i class="fas fa-robot"></i> Bot Services</a></li>
+    <li><a href="index.html#nft"><i class="fas fa-gem"></i> NFT Sales</a></li>
+    <li><a href="index.html#licensing"><i class="fas fa-file-contract"></i> Licensing</a></li>
+    <li><a href="index.html#crypto"><i class="fab fa-bitcoin"></i> Crypto</a></li>
+    <li><a href="index.html#affiliates"><i class="fas fa-link"></i> Affiliates</a></li>
+  </ul>
+  
+  <div class="sidebar-contact">
+    <strong style="color:#f7931a">Contact:</strong><br>
+    <a href="mailto:korerussbiz@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+    <a href="tel:+18768090958"><i class="fas fa-phone"></i> +1 (876) 809-0958</a>
+  </div>
+</div>
+
+<div class="main-content">
 <div class="container">
 
 <div class="header">
@@ -115,6 +146,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-g
 </div>
 
 </div>
+</div>
 
 <div class="player-fixed">
 <div class="player-content">
@@ -133,6 +165,10 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-g
 
 <script src="player.js"></script>
 <script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
 const movieChannels = [
   {name: 'Classics', videos: ['dQw4w9WgXcQ','jNQXAC9IVRw','9bZkp7q19f0']},
   {name: 'Modern', videos: ['dQw4w9WgXcQ','jNQXAC9IVRw','9bZkp7q19f0']},

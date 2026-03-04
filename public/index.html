@@ -15,6 +15,7 @@
 <meta name="twitter:title" content="Koreruss - 203 Original Tracks">
 <meta name="twitter:description" content="Stream 203 original tracks free. Hip hop producer and BMI member.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="sidebar.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2772533792093956" crossorigin="anonymous"></script>
 <!-- Adsterra Banner -->
 <script type="text/javascript">
@@ -29,7 +30,7 @@
 </script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#0a0a0a,#1a1a2e);color:#fff;line-height:1.6}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#0a0a0a,#1a1a2e);color:#fff;line-height:1.6;padding-bottom:180px}
 .container{max-width:1400px;margin:0 auto;padding:20px}
 .header{background:linear-gradient(135deg,#667eea,#764ba2);padding:60px 20px;text-align:center;border-radius:20px;margin-bottom:30px;box-shadow:0 10px 40px rgba(0,0,0,0.5)}
 .header h1{font-size:3.5em;margin-bottom:15px;text-shadow:3px 3px 6px rgba(0,0,0,0.7)}
@@ -73,6 +74,36 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-g
 </style>
 </head>
 <body>
+
+<button class="sidebar-toggle" onclick="toggleSidebar()">
+  <i class="fas fa-bars"></i>
+</button>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <h2><i class="fas fa-music"></i> KORERUSS</h2>
+    <p>Music Producer | BMI Member</p>
+  </div>
+  
+  <ul class="sidebar-menu">
+    <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="music.html"><i class="fas fa-music"></i> Music (203)</a></li>
+    <li><a href="movies.html"><i class="fas fa-film"></i> Movies</a></li>
+    <li><a href="korerussbiz.html"><i class="fas fa-robot"></i> Bot Services</a></li>
+    <li><a href="#nft"><i class="fas fa-gem"></i> NFT Sales</a></li>
+    <li><a href="#licensing"><i class="fas fa-file-contract"></i> Licensing</a></li>
+    <li><a href="#crypto"><i class="fab fa-bitcoin"></i> Crypto</a></li>
+    <li><a href="#affiliates"><i class="fas fa-link"></i> Affiliates</a></li>
+  </ul>
+  
+  <div class="sidebar-contact">
+    <strong style="color:#f7931a">Contact:</strong><br>
+    <a href="mailto:korerussbiz@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+    <a href="tel:+18768090958"><i class="fas fa-phone"></i> +1 (876) 809-0958</a>
+  </div>
+</div>
+
+<div class="main-content">
 <div class="container">
 
 <div class="header">
@@ -731,6 +762,15 @@ document.querySelectorAll('.btn-play').forEach(btn => {
   });
 });
 </script>
+
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+</script>
+
+</div>
+</div>
 
 </body>
 </html>

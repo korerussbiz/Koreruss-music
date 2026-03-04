@@ -6,9 +6,10 @@
 <title>KorerussBiz - Professional Bot Services | Pay-Per-Use Automation</title>
 <meta name="description" content="Professional automation bots for crypto, trading, and business. Pay-per-use pricing. Secure, private, authorized access only.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="sidebar.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#0a0a0a,#1a1a2e);color:#fff;line-height:1.6}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#0a0a0a,#1a1a2e);color:#fff;line-height:1.6;padding-bottom:180px}
 .container{max-width:1400px;margin:0 auto;padding:20px}
 .header{background:linear-gradient(135deg,#f7931a,#ff6b35);padding:60px 20px;text-align:center;border-radius:20px;margin-bottom:30px;box-shadow:0 10px 40px rgba(247,147,26,0.5)}
 .header h1{font-size:3.5em;margin-bottom:15px;text-shadow:3px 3px 6px rgba(0,0,0,0.7)}
@@ -40,6 +41,36 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-g
 </style>
 </head>
 <body>
+
+<button class="sidebar-toggle" onclick="toggleSidebar()">
+  <i class="fas fa-bars"></i>
+</button>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <h2><i class="fas fa-music"></i> KORERUSS</h2>
+    <p>Music Producer | BMI Member</p>
+  </div>
+  
+  <ul class="sidebar-menu">
+    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="music.html"><i class="fas fa-music"></i> Music (203)</a></li>
+    <li><a href="movies.html"><i class="fas fa-film"></i> Movies</a></li>
+    <li><a href="korerussbiz.html" class="active"><i class="fas fa-robot"></i> Bot Services</a></li>
+    <li><a href="index.html#nft"><i class="fas fa-gem"></i> NFT Sales</a></li>
+    <li><a href="index.html#licensing"><i class="fas fa-file-contract"></i> Licensing</a></li>
+    <li><a href="index.html#crypto"><i class="fab fa-bitcoin"></i> Crypto</a></li>
+    <li><a href="index.html#affiliates"><i class="fas fa-link"></i> Affiliates</a></li>
+  </ul>
+  
+  <div class="sidebar-contact">
+    <strong style="color:#f7931a">Contact:</strong><br>
+    <a href="mailto:korerussbiz@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+    <a href="tel:+18768090958"><i class="fas fa-phone"></i> +1 (876) 809-0958</a>
+  </div>
+</div>
+
+<div class="main-content">
 <div class="container">
 
 <div class="header">
@@ -262,7 +293,14 @@ All bots require authorization | No source code shared | Contact for access<br>
 <script>
 console.log('KorerussBiz Bot Services - Loaded');
 console.log('All access requires authorization via korerussbiz@gmail.com');
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
 </script>
+
+</div>
+</div>
 
 </body>
 </html>
