@@ -74,40 +74,100 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-g
 </div>
 
 <div class="section">
-<h2><i class="fas fa-download"></i> XMRig Miner - Official Downloads</h2>
+<h2><i class="fas fa-download"></i> XMRig Downloads - All Platforms</h2>
 <p style="text-align:center;margin-bottom:30px">
-<strong>Download directly from official XMRig GitHub repository</strong><br>
+<strong>Download XMRig for any device</strong><br>
 <small style="opacity:0.8">XMRig is free, open-source software. I provide links and earn referral commission when you use my pool address.</small>
 </p>
 
 <div class="tool-card">
-<h3 style="color:#f7931a;margin-bottom:15px"><i class="fab fa-windows"></i> Windows</h3>
+<h3 style="color:#f7931a;margin-bottom:15px"><i class="fab fa-windows"></i> Windows (Desktop)</h3>
 <p>For Windows 10/11 (64-bit)</p>
 <a href="https://github.com/xmrig/xmrig/releases/latest/download/xmrig-6.21.0-msvc-win64.zip" target="_blank" class="btn btn-download">
-<i class="fas fa-download"></i> Download XMRig for Windows
+<i class="fas fa-download"></i> Download for Windows
 </a>
+<p style="margin-top:10px;font-size:14px;opacity:0.8">Extract and run xmrig.exe</p>
 </div>
 
 <div class="tool-card">
-<h3 style="color:#f7931a;margin-bottom:15px"><i class="fab fa-linux"></i> Linux</h3>
-<p>For Ubuntu/Debian/Linux distributions</p>
+<h3 style="color:#f7931a;margin-bottom:15px"><i class="fab fa-linux"></i> Linux (Desktop & Termux)</h3>
+<p>For Ubuntu/Debian/Termux on Android</p>
 <a href="https://github.com/xmrig/xmrig/releases/latest/download/xmrig-6.21.0-linux-static-x64.tar.gz" target="_blank" class="btn btn-download">
-<i class="fas fa-download"></i> Download XMRig for Linux
+<i class="fas fa-download"></i> Download for Linux
 </a>
+<p style="margin-top:10px;font-size:14px;opacity:0.8">Extract and run: ./xmrig</p>
 </div>
 
 <div class="tool-card">
-<h3 style="color:#f7931a;margin-bottom:15px"><i class="fab fa-apple"></i> macOS</h3>
+<h3 style="color:#f7931a;margin-bottom:15px"><i class="fab fa-android"></i> Android (Termux)</h3>
+<p>Mine on Android using Termux app</p>
+<a href="https://github.com/xmrig/xmrig/releases/latest" target="_blank" class="btn btn-download">
+<i class="fas fa-download"></i> Get Termux Setup Guide
+</a>
+<div style="margin-top:15px;padding:15px;background:#1a1a1a;border-radius:10px">
+<strong>Quick Termux Setup:</strong>
+<div class="code-box" style="margin-top:10px">
+pkg update && pkg upgrade
+pkg install git cmake libuv openssl
+git clone https://github.com/xmrig/xmrig.git
+cd xmrig && mkdir build && cd build
+cmake .. && make
+./xmrig -o pool.supportxmr.com:443 -u YOUR_WALLET -k --tls
+</div>
+</div>
+</div>
+
+<div class="tool-card">
+<h3 style="color:#f7931a;margin-bottom:15px"><i class="fab fa-apple"></i> macOS (Desktop)</h3>
 <p>For macOS (Intel & Apple Silicon)</p>
 <a href="https://github.com/xmrig/xmrig/releases/latest" target="_blank" class="btn btn-download">
-<i class="fas fa-download"></i> Download XMRig for macOS
+<i class="fas fa-download"></i> Download for macOS
 </a>
+<p style="margin-top:10px;font-size:14px;opacity:0.8">Extract and run in Terminal</p>
+</div>
+
+<div class="tool-card">
+<h3 style="color:#f7931a;margin-bottom:15px"><i class="fab fa-apple"></i> iOS (Limited)</h3>
+<p>iOS doesn't support mining apps directly</p>
+<div style="padding:15px;background:rgba(255,107,53,0.2);border-radius:10px;margin-top:10px">
+<i class="fas fa-exclamation-triangle"></i> <strong>Note:</strong> Apple doesn't allow mining apps on iOS. 
+Use a Mac or jailbroken device instead.
+</div>
 </div>
 
 <div style="text-align:center;margin-top:30px">
 <a href="https://github.com/xmrig/xmrig/releases" target="_blank" class="btn">
 <i class="fab fa-github"></i> View All Releases on GitHub
 </a>
+</div>
+</div>
+
+<div class="section">
+<h2><i class="fas fa-rocket"></i> KorerussBiz Multicoin Miner Suite</h2>
+<p style="text-align:center;margin-bottom:30px">
+<strong>My Custom Mining Suite - XMR, BTC, LTC, ETH</strong><br>
+<small style="opacity:0.8">Advanced multi-cryptocurrency mining with dashboard</small>
+</p>
+
+<div class="tool-card" style="border:3px solid #1db954">
+<h3 style="color:#1db954;margin-bottom:15px"><i class="fas fa-coins"></i> Crypto Suite Master</h3>
+<p>Mine multiple cryptocurrencies with one tool</p>
+<ul class="feature-list" style="margin:15px 0">
+<li>XMR (Monero) Mining</li>
+<li>BTC (Bitcoin) Mining</li>
+<li>LTC (Litecoin) Mining</li>
+<li>ETH (Ethereum) Mining</li>
+<li>Built-in Dashboard</li>
+<li>Auto Pool Switching</li>
+<li>Commission Calculator</li>
+<li>Termux & Linux Compatible</li>
+</ul>
+<a href="mailto:korerussbiz@gmail.com?subject=Multicoin%20Miner%20Suite" class="btn btn-download">
+<i class="fas fa-envelope"></i> Contact for Access
+</a>
+<p style="margin-top:15px;font-size:14px;opacity:0.8">
+<i class="fas fa-lock"></i> Custom software - Contact me for pricing and setup
+</p>
 </div>
 </div>
 
