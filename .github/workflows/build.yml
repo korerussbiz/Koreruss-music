@@ -1,0 +1,20 @@
+name: Build Installer
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install NSIS
+        run: choco install nsis -y
+      - name: Compile installer
+        run: makensis KorerussBizMiner.nsi
+      - name: Upload Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: KorerussBizMiner_Setup.exe
