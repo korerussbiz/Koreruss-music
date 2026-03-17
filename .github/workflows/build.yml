@@ -1,25 +1,65 @@
-name: Build Installer
+name: Build KorerussBizMiner Installer
 
 on:
   push:
     tags:
       - 'v*'
+  # Optional: allow manual trigger for testing
+  workflow_dispatch:
+
+env:
+  # Force Node.js 24 to opt out of the deprecation warning and prepare for the future
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: Install NSIS
-        run: choco install nsis -y
+      - name: Checkout Repository
+        # Use the latest version which supports Node.js 24
+        uses: actions/checkout@v4
+
+      - name: Install NSIS and Dependencies via Chocolatey
         shell: powershell
-      
-      - name: Compile installer
-        run: makensis KorerussBizMiner.nsi
-        shell: cmd
-      
-      - name: Upload Release
-        uses: softprops/action-gh-release@v1
+        run: |
+          # Install NSIS. The /installarguments ensures it's available globally.
+          choco install nsis -y --installargs 'ADD_MAKENSIS_TO_PATH=YES'
+          
+          # Install zip utility for potential packaging needs [citation:1]
+          choco install zip -y
+          
+          # Verify installation and explicitly add to PATH for safety
+          $nsisPath = "C:\Program Files (x86)\NSIS"
+          if (Test-Path $nsisPath) {
+            echo "NSIS found at $nsisPath"
+            echo "$nsisPath" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          } else {
+            Write-Error "NSIS installation failed or path is incorrect."
+            exit 1
+          }
+
+      - name: Verify makensis is accessible
+        shell: powershell
+        run: |
+          makensis /VERSION
+          if ($LASTEXITCODE -ne 0) { throw "makensis command failed" }
+
+      - name: Compile NSIS Installer
+        shell: powershell
+        run: |
+          # Compile the installer. The full path is no longer needed if PATH is set,
+          # but we use it for absolute certainty.
+          & "C:\Program Files (x86)\NSIS\makensis.exe" KorerussBizMiner.nsi
+
+      - name: Upload Artifact (for testing)
+        uses: actions/upload-artifact@v4
+        with:
+          name: KorerussBizMiner-Installer
+          path: KorerussBizMiner_Setup.exe
+
+      - name: Upload Release Asset
+        # Use the latest version, v2 is confirmed to be compatible with Node.js 24
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: KorerussBizMiner_Setup.exe
