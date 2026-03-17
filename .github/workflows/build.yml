@@ -10,10 +10,15 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      
       - name: Install NSIS
         run: choco install nsis -y
+        shell: powershell
+      
       - name: Compile installer
         run: makensis KorerussBizMiner.nsi
+        shell: cmd
+      
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
