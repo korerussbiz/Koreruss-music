@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koreruss Music - Full Catalog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#0a0a0a,#1a1a2e);color:#fff;line-height:1.6}
+        .container{max-width:1400px;margin:0 auto;padding:20px}
+        .nav{text-align:center;margin:20px 0;}
+        .nav a{color:#667eea;margin:0 15px;font-weight:500;text-decoration:none;}
+        .nav a:hover{text-decoration:underline}
+        .header{background:linear-gradient(135deg,#667eea,#764ba2);padding:60px 20px;text-align:center;border-radius:20px;margin-bottom:30px;}
+        .header h1{font-size:3em;margin-bottom:15px;}
+        .header p{font-size:1.2em}
+        .player-section{background:rgba(26,26,26,0.9);padding:30px;border-radius:20px;margin:30px 0;border:1px solid rgba(247,147,26,0.2)}
+        #audio-player{width:100%;margin:20px 0}
+        .song-list{max-height:500px;overflow-y:auto;background:#2a2a2a;border-radius:15px;padding:15px}
+        .song-item{padding:12px;margin:8px 0;background:#1a1a1a;border-radius:8px;cursor:pointer;border-left:4px solid transparent;transition:all 0.2s}
+        .song-item:hover{background:#333;border-left-color:#f7931a}
+        .song-item.playing{background:#333;border-left-color:#1db954}
+        .song-item .song-name{font-weight:bold}
+        .song-item .song-size{font-size:0.8em;opacity:0.7;margin-left:10px}
+        .btn{background:linear-gradient(135deg,#f7931a,#ff9f1a);color:#000;border:none;padding:12px 25px;border-radius:25px;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.3s}
+        .btn:hover{transform:scale(1.05);box-shadow:0 5px 20px rgba(247,147,26,0.5)}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="koreruss-miner.html">Miner</a>
+        <a href="koreruss-music-MUSIC-FIRST.html">Music</a>
+        <a href="korerussbiz.html">Crypto</a>
+        <a href="download.html">Download</a>
+        <a href="#contact">Contact</a>
+    </div>
+    <div class="header">
+        <h1><i class="fas fa-music"></i> Koreruss Music</h1>
+        <p>🎧 200+ Original Tracks – Stream Free</p>
+    </div>
+
+    <div class="player-section">
+        <h2 style="color:#f7931a;margin-bottom:20px">Now Playing</h2>
+        <audio id="audio-player" controls style="width:100%"></audio>
+        <div style="margin:20px 0;text-align:center">
+            <button class="btn" id="shuffle-btn"><i class="fas fa-random"></i> Shuffle</button>
+            <button class="btn" id="prev-btn"><i class="fas fa-step-backward"></i> Prev</button>
+            <button class="btn" id="next-btn"><i class="fas fa-step-forward"></i> Next</button>
+        </div>
+        <div id="song-list-container" class="song-list">
+            <p style="text-align:center">Loading songs...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+let songs = [];
+let currentIndex = 0;
+let audio = document.getElementById('audio-player');
+
+// Load songs from songs.json
+fetch('songs.json')
+    .then(response => response.json())
+    .then(data => {
+        songs = data;
+        renderSongList();
+        if (songs.length > 0) {
+            loadSong(0);
+        }
+    })
+    .catch(error => {
+        document.getElementById('song-list-container').innerHTML = '<p style="color:#ff6b35">Error loading songs. Please try again later.</p>';
+    });
+
+function renderSongList() {
+    const container = document.getElementById('song-list-container');
+    container.innerHTML = '';
+    songs.forEach((song, index) => {
+        const div = document.createElement('div');
+        div.className = 'song-item' + (index === currentIndex ? ' playing' : '');
+        div.innerHTML = `<span class="song-name">${song.name}</span><span class="song-size">${(song.size/1024/1024).toFixed(2)} MB</span>`;
+        div.onclick = () => loadSong(index);
+        container.appendChild(div);
+    });
+}
+
+function loadSong(index) {
+    if (index < 0 || index >= songs.length) return;
+    currentIndex = index;
+    const song = songs[index];
+    // Construct the streaming URL – adjust to your actual music server
+    // Example: if your server is at http://yourserver/stream, and song.path is the full path,
+    // you might need to map it. We'll assume the path is directly accessible via a base URL.
+    // For now, we use a placeholder. Replace with your actual streaming endpoint.
+    // const baseUrl = 'https://ancient-swan-53.loca.lt/stream/';
+    // const fileUrl = baseUrl + encodeURIComponent(song.path);
+    // For demonstration, we'll just use the filename – you'll need to implement the server.
+    // Let's use a simpler approach: if files are accessible via a URL like https://your-server.com/music/{filename}
+    // We'll assume the server serves files from the same directory as the path.
+    // Actually, we need a real solution. Since you have a loca.lt server, maybe you have an API.
+    // For now, we'll just set a placeholder and you can replace it later.
+    const fileUrl = 'https://ancient-swan-53.loca.lt/stream/' + encodeURIComponent(song.path); // adjust as needed
+    audio.src = fileUrl;
+    audio.play();
+    updateActiveClass();
+}
+
+function updateActiveClass() {
+    document.querySelectorAll('.song-item').forEach((el, idx) => {
+        el.classList.toggle('playing', idx === currentIndex);
+    });
+}
+
+document.getElementById('shuffle-btn').addEventListener('click', () => {
+    if (songs.length === 0) return;
+    const randomIndex = Math.floor(Math.random() * songs.length);
+    loadSong(randomIndex);
+});
+
+document.getElementById('prev-btn').addEventListener('click', () => {
+    if (songs.length === 0) return;
+    let newIndex = currentIndex - 1;
+    if (newIndex < 0) newIndex = songs.length - 1;
+    loadSong(newIndex);
+});
+
+document.getElementById('next-btn').addEventListener('click', () => {
+    if (songs.length === 0) return;
+    let newIndex = currentIndex + 1;
+    if (newIndex >= songs.length) newIndex = 0;
+    loadSong(newIndex);
+});
+
+// Auto-play next when current ends
+audio.addEventListener('ended', () => {
+    document.getElementById('next-btn').click();
+});
+</script>
+</body>
+</html>
