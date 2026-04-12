@@ -4,6 +4,7 @@
     <title>Koreruss NFT Gallery</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
         h1 { text-align: center; }
@@ -16,6 +17,7 @@
         button { padding: 10px 20px; background: #4caf50; color: white; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
         button:hover { background: #45a049; }
         #wallet-status { text-align: center; margin-bottom: 20px; font-weight: bold; }
+        .error { color: red; text-align: center; }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
 </head>
@@ -25,34 +27,47 @@
         <button id="connectWallet">Connect Wallet</button>
         <div id="wallet-status"></div>
     </div>
-    <div id="gallery" class="gallery"></div>
+    <div id="gallery" class="gallery">Loading NFTs...</div>
 
     <script>
-        // Hardcoded NFT data from your successful mints (token IDs 4-9)
+        const walletAddress = "0xCf974b9e14766f839D8C59bDA1D4Dff3CF3f8b33";
         const contractAddress = "0x72c997ED37F786829F01f6a73B14F6Bdd61c2B94";
-        const nfts = [
-            { tokenId: "4", name: "simple_20260319_112333_20260319_181630_final.mp4", image: "https://ipfs.io/ipfs/QmWLMEW6yvnQgG8LPEhJMjz9SNSj4ogdrasa5Sg57HLamz" },
-            { tokenId: "5", name: "simple_20260319_112754_1_20260319_154356_final.mp4", image: "https://ipfs.io/ipfs/QmbrAWtLZZjkC6y5TyctsbMvUJuLg4hkJWxcmAVSk4bfkd" },
-            { tokenId: "6", name: "simple_20260319_112754_1_20260319_181616_final.mp4", image: "https://ipfs.io/ipfs/QmTECLXtXCEFVBc9PfCntbFCNV9AZZeVuvFmU1S3Xi3WPJ" },
-            { tokenId: "7", name: "simple_20260319_112754_1_20260319_181636_final.mp4", image: "https://ipfs.io/ipfs/QmZ1UBuLHXPdFRNP7DZHFoznXbfh3jQywcvTio816B5Bga" },
-            { tokenId: "8", name: "simple_20260319_112333_20260319_181625_final_audio0.mp4", image: "https://ipfs.io/ipfs/QmP39gxFn4YyQubgindGdN2gq7m5ugwfzfftHNxeZKbSW1" },
-            { tokenId: "9", name: "simple_20260319_112333_20260319_181625_final_audio0_sepia.mp4", image: "https://ipfs.io/ipfs/QmZBphNgjhTLZgH3h9teW23Svx3fQc5sWBXjkVaXEXs9GM" }
-        ];
+        const apiUrl = `https://api.opensea.io/api/v2/chain/polygon/account/${walletAddress}/nfts?limit=50`;
 
-        const galleryDiv = document.getElementById("gallery");
-        for (const nft of nfts) {
-            const card = document.createElement("div");
-            card.className = "nft-card";
-            card.innerHTML = `
-                <img src="${nft.image}" alt="${nft.name}" onerror="this.src='https://via.placeholder.com/250'">
-                <h3>${nft.name.substring(0, 30)}</h3>
-                <p>Token ID: ${nft.tokenId}</p>
-                <a href="https://opensea.io/assets/polygon/${contractAddress}/${nft.tokenId}" target="_blank">View on OpenSea</a>
-            `;
-            galleryDiv.appendChild(card);
+        async function fetchAndDisplay() {
+            const galleryDiv = document.getElementById("gallery");
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+                const nfts = data.nfts;
+                if (!nfts || nfts.length === 0) {
+                    galleryDiv.innerHTML = "<p>No NFTs found.</p>";
+                    return;
+                }
+                galleryDiv.innerHTML = "";
+                for (const nft of nfts) {
+                    const name = nft.name || `Token #${nft.identifier}`;
+                    const imageUrl = nft.display_image_url || nft.image_url || "https://via.placeholder.com/250";
+                    const tokenId = nft.identifier;
+                    const openseaLink = `https://opensea.io/assets/polygon/${contractAddress}/${tokenId}`;
+                    const card = document.createElement("div");
+                    card.className = "nft-card";
+                    card.innerHTML = `
+                        <img src="${imageUrl}" alt="${name}" onerror="this.src='https://via.placeholder.com/250'">
+                        <h3>${name.substring(0, 30)}</h3>
+                        <p>Token ID: ${tokenId}</p>
+                        <a href="${openseaLink}" target="_blank">View on OpenSea</a>
+                    `;
+                    galleryDiv.appendChild(card);
+                }
+            } catch (err) {
+                galleryDiv.innerHTML = `<p class="error">Error: ${err.message}</p>`;
+            }
         }
+        fetchAndDisplay();
 
-        // Wallet connect (optional)
+        // Wallet connect
         let provider, signer;
         const connectBtn = document.getElementById("connectWallet");
         const statusDiv = document.getElementById("wallet-status");
