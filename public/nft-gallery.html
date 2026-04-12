@@ -14,65 +14,52 @@
         .nft-card a { display: inline-block; margin-top: 10px; padding: 5px 10px; background: #2081e2; color: white; text-decoration: none; border-radius: 5px; }
         .nft-card a:hover { background: #0a5cb0; }
         .error { color: red; text-align: center; }
-        .loading { text-align: center; font-size: 1.2em; margin-top: 50px; }
     </style>
 </head>
 <body>
     <h1>Koreruss NFT Collection</h1>
-    <div id="gallery" class="gallery loading">Loading NFTs...</div>
+    <div id="gallery" class="gallery">Loading NFTs...</div>
     <script>
-        // Your wallet address
         const walletAddress = "0xCf974b9e14766f839D8C59bDA1D4Dff3CF3f8b33";
-        // Using a public Alchemy API key for demo. You can replace with your own.
-        const apiKey = "demo"; 
-        
-        // URL to fetch NFTs for your wallet on Polygon mainnet
-        const apiUrl = `https://polygon-mainnet.g.alchemy.com/nft/v2/${apiKey}/getNFTsForOwner?owner=${walletAddress}&withMetadata=true&pageSize=100`;
+        const INFURA_PROJECT_ID = "9aa3d95b3bc440fa88ea12eaa4456161";
+        const apiUrl = `https://nft.api.infura.io/networks/polygon-mainnet/accounts/${walletAddress}/assets/nfts`;
 
-        async function fetchAndDisplayNFTs() {
+        async function fetchNFTs() {
             const galleryDiv = document.getElementById("gallery");
             try {
-                galleryDiv.innerHTML = '<div class="loading">Fetching your NFTs...</div>';
-                const response = await fetch(apiUrl);
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
+                const response = await fetch(apiUrl, {
+                    headers: { 'Authorization': `Bearer ${INFURA_PROJECT_ID}` }
+                });
+                if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 const data = await response.json();
-                const nfts = data.ownedNfts;
+                const nfts = data.assets;
                 if (!nfts || nfts.length === 0) {
-                    galleryDiv.innerHTML = "<p class='error'>No NFTs found for this wallet address.</p>";
+                    galleryDiv.innerHTML = "<p>No NFTs found for this wallet address.</p>";
                     return;
                 }
                 galleryDiv.innerHTML = "";
                 for (const nft of nfts) {
-                    // Extract metadata
-                    const name = nft.title || nft.contract.name || `Token ${nft.id.tokenId}`;
-                    let imageUrl = "https://via.placeholder.com/250?text=No+Image";
-                    if (nft.media && nft.media.length > 0 && nft.media[0].gateway) {
-                        imageUrl = nft.media[0].gateway;
-                    } else if (nft.metadata && nft.metadata.image) {
-                        // Handle IPFS URLs
-                        imageUrl = nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/');
-                    }
-                    const tokenId = nft.id.tokenId;
-                    const contractAddress = nft.contract.address;
+                    const name = nft.name || `Token ${nft.token_id}`;
+                    let imageUrl = nft.image_url || "https://via.placeholder.com/250";
+                    const tokenId = nft.token_id;
+                    const contractAddress = nft.contract_address;
                     const openseaUrl = `https://opensea.io/assets/matic/${contractAddress}/${tokenId}`;
                     const card = document.createElement("div");
                     card.className = "nft-card";
                     card.innerHTML = `
-                        <img src="${imageUrl}" alt="${name}" onerror="this.onerror=null;this.src='https://via.placeholder.com/250?text=Failed+to+Load';">
+                        <img src="${imageUrl}" alt="${name}">
                         <h3>${name.substring(0, 30)}</h3>
-                        <p>Token ID: ${tokenId.substring(0, 10)}...</p>
+                        <p>Token ID: ${tokenId}</p>
                         <a href="${openseaUrl}" target="_blank">View on OpenSea</a>
                     `;
                     galleryDiv.appendChild(card);
                 }
             } catch (err) {
                 console.error("Error fetching NFTs:", err);
-                galleryDiv.innerHTML = `<p class="error">Error loading NFTs: ${err.message}. Please check the console for more details.</p>`;
+                galleryDiv.innerHTML = `<p class="error">Error loading NFTs: ${err.message}</p>`;
             }
         }
-        fetchAndDisplayNFTs();
+        fetchNFTs();
     </script>
 </body>
 </html>
