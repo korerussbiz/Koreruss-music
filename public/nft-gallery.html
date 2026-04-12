@@ -21,10 +21,8 @@
     <div id="gallery" class="gallery">Loading NFTs...</div>
     <script>
         const walletAddress = "0xCf974b9e14766f839D8C59bDA1D4Dff3CF3f8b33";
-        const chain = "polygon";
-        // Use Polygonscan API (free, no key needed)
-        const apiUrl = `https://api.polygonscan.com/api?module=account&action=tokennfttx&address=${walletAddress}&sort=asc&apikey=YourApiKeyToken`;
-        // Note: Polygonscan API does not require an API key for basic usage, but you can get a free key for higher limits.
+        const contractAddress = "0x72c997ED37F786829F01f6a73B14F6Bdd61c2B94";
+        const apiUrl = `https://api.polygonscan.com/api?module=account&action=tokennfttx&address=${walletAddress}&sort=asc`;
 
         async function fetchNFTs() {
             const galleryDiv = document.getElementById("gallery");
@@ -38,12 +36,11 @@
                     galleryDiv.innerHTML = "<p>No NFTs found for this wallet address.</p>";
                     return;
                 }
-                // Deduplicate token IDs (multiple transfers)
+                // Group by token ID (only unique NFTs)
                 const tokenMap = new Map();
                 for (const tx of txs) {
-                    const tokenId = tx.tokenID;
-                    if (!tokenMap.has(tokenId)) {
-                        tokenMap.set(tokenId, { tokenId, tokenURI: tx.tokenURI });
+                    if (!tokenMap.has(tx.tokenID)) {
+                        tokenMap.set(tx.tokenID, { tokenId: tx.tokenID, tokenURI: tx.tokenURI });
                     }
                 }
                 const nfts = Array.from(tokenMap.values());
@@ -65,8 +62,7 @@
                     } catch (e) {
                         console.error("Metadata fetch failed", e);
                     }
-                    const contractAddress = "0x72c997ED37F786829F01f6a73B14F6Bdd61c2B94"; // your NFT contract
-                    const openseaUrl = `https://opensea.io/assets/${chain}/${contractAddress}/${nft.tokenId}`;
+                    const openseaUrl = `https://opensea.io/assets/polygon/${contractAddress}/${nft.tokenId}`;
                     const card = document.createElement("div");
                     card.className = "nft-card";
                     card.innerHTML = `
