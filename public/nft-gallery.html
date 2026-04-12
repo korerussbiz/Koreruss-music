@@ -9,77 +9,70 @@
         h1 { text-align: center; }
         .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
         .nft-card { background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); width: 250px; padding: 10px; text-align: center; }
-        .nft-card img { max-width: 100%; border-radius: 8px; }
+        .nft-card img { max-width: 100%; border-radius: 8px; max-height: 250px; object-fit: contain; }
         .nft-card h3 { font-size: 1.1em; margin: 10px 0; }
         .nft-card a { display: inline-block; margin-top: 10px; padding: 5px 10px; background: #2081e2; color: white; text-decoration: none; border-radius: 5px; }
         .nft-card a:hover { background: #0a5cb0; }
         .error { color: red; text-align: center; }
+        .loading { text-align: center; font-size: 1.2em; margin-top: 50px; }
     </style>
 </head>
 <body>
     <h1>Koreruss NFT Collection</h1>
-    <div id="gallery" class="gallery">Loading NFTs...</div>
+    <div id="gallery" class="gallery loading">Loading NFTs...</div>
     <script>
+        // Your wallet address
         const walletAddress = "0xCf974b9e14766f839D8C59bDA1D4Dff3CF3f8b33";
-        const contractAddress = "0x72c997ED37F786829F01f6a73B14F6Bdd61c2B94";
-        const apiKey = "PGGQHQ7EHPRUIBE2H9WW9ZS75KIWCUXZQZ";
-        const apiUrl = `https://api.polygonscan.com/api?module=account&action=tokennfttx&address=${walletAddress}&sort=asc&apikey=${apiKey}`;
+        // Using a public Alchemy API key for demo. You can replace with your own.
+        const apiKey = "demo"; 
+        
+        // URL to fetch NFTs for your wallet on Polygon mainnet
+        const apiUrl = `https://polygon-mainnet.g.alchemy.com/nft/v2/${apiKey}/getNFTsForOwner?owner=${walletAddress}&withMetadata=true&pageSize=100`;
 
-        async function fetchNFTs() {
+        async function fetchAndDisplayNFTs() {
             const galleryDiv = document.getElementById("gallery");
             try {
+                galleryDiv.innerHTML = '<div class="loading">Fetching your NFTs...</div>';
                 const response = await fetch(apiUrl);
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
                 const data = await response.json();
-                if (data.status !== "1") throw new Error(data.message);
-                const txs = data.result;
-                if (!txs || txs.length === 0) {
-                    galleryDiv.innerHTML = "<p>No NFTs found for this wallet address.</p>";
+                const nfts = data.ownedNfts;
+                if (!nfts || nfts.length === 0) {
+                    galleryDiv.innerHTML = "<p class='error'>No NFTs found for this wallet address.</p>";
                     return;
                 }
-                // Group by token ID (unique NFTs)
-                const tokenMap = new Map();
-                for (const tx of txs) {
-                    if (!tokenMap.has(tx.tokenID)) {
-                        tokenMap.set(tx.tokenID, { tokenId: tx.tokenID, tokenURI: tx.tokenURI });
-                    }
-                }
-                const nfts = Array.from(tokenMap.values());
                 galleryDiv.innerHTML = "";
                 for (const nft of nfts) {
-                    let metadata = null;
-                    let imageUrl = "https://via.placeholder.com/250";
-                    let name = `Token ${nft.tokenId}`;
-                    try {
-                        const metaUrl = nft.tokenURI.replace("ipfs://", "https://ipfs.io/ipfs/");
-                        const metaRes = await fetch(metaUrl);
-                        metadata = await metaRes.json();
-                        if (metadata) {
-                            name = metadata.name || name;
-                            let img = metadata.image || metadata.animation_url;
-                            if (img) img = img.replace("ipfs://", "https://ipfs.io/ipfs/");
-                            imageUrl = img || imageUrl;
-                        }
-                    } catch (e) {
-                        console.error("Metadata fetch failed", e);
+                    // Extract metadata
+                    const name = nft.title || nft.contract.name || `Token ${nft.id.tokenId}`;
+                    let imageUrl = "https://via.placeholder.com/250?text=No+Image";
+                    if (nft.media && nft.media.length > 0 && nft.media[0].gateway) {
+                        imageUrl = nft.media[0].gateway;
+                    } else if (nft.metadata && nft.metadata.image) {
+                        // Handle IPFS URLs
+                        imageUrl = nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/');
                     }
-                    const openseaUrl = `https://opensea.io/assets/polygon/${contractAddress}/${nft.tokenId}`;
+                    const tokenId = nft.id.tokenId;
+                    const contractAddress = nft.contract.address;
+                    const openseaUrl = `https://opensea.io/assets/matic/${contractAddress}/${tokenId}`;
                     const card = document.createElement("div");
                     card.className = "nft-card";
                     card.innerHTML = `
-                        <img src="${imageUrl}" alt="${name}">
-                        <h3>${name}</h3>
-                        <p>Token ID: ${nft.tokenId}</p>
+                        <img src="${imageUrl}" alt="${name}" onerror="this.onerror=null;this.src='https://via.placeholder.com/250?text=Failed+to+Load';">
+                        <h3>${name.substring(0, 30)}</h3>
+                        <p>Token ID: ${tokenId.substring(0, 10)}...</p>
                         <a href="${openseaUrl}" target="_blank">View on OpenSea</a>
                     `;
                     galleryDiv.appendChild(card);
                 }
             } catch (err) {
-                console.error(err);
-                galleryDiv.innerHTML = `<p class="error">Error loading NFTs: ${err.message}</p>`;
+                console.error("Error fetching NFTs:", err);
+                galleryDiv.innerHTML = `<p class="error">Error loading NFTs: ${err.message}. Please check the console for more details.</p>`;
             }
         }
-        fetchNFTs();
+        fetchAndDisplayNFTs();
     </script>
 </body>
 </html>
