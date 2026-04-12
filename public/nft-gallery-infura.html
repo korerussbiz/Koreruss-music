@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Koreruss NFT Gallery (Infura)</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        h1 { text-align: center; }
+        .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .nft-card { background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); width: 250px; padding: 10px; text-align: center; }
+        .nft-card img { max-width: 100%; border-radius: 8px; }
+        .nft-card h3 { font-size: 1.1em; margin: 10px 0; }
+        .nft-card a { display: inline-block; margin-top: 10px; padding: 5px 10px; background: #2081e2; color: white; text-decoration: none; border-radius: 5px; }
+        .nft-card a:hover { background: #0a5cb0; }
+        .error { color: red; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>Koreruss NFT Collection</h1>
+    <div id="gallery" class="gallery">Loading NFTs...</div>
+    <script>
+        const WALLET_ADDRESS = "0xCf974b9e14766f839D8C59bDA1D4Dff3CF3f8b33";
+        const INFURA_PROJECT_ID = "YOUR_PROJECT_ID";  // Replace with your actual Project ID
+        const apiUrl = `https://nft.api.infura.io/networks/polygon-mainnet/accounts/${WALLET_ADDRESS}/assets/nfts`;
+        async function fetchNFTs() {
+            const galleryDiv = document.getElementById("gallery");
+            try {
+                const response = await fetch(apiUrl, {
+                    headers: { 'Authorization': `Bearer ${INFURA_PROJECT_ID}` }
+                });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+                const nfts = data.assets;
+                if (!nfts || nfts.length === 0) {
+                    galleryDiv.innerHTML = "<p>No NFTs found for this wallet address.</p>";
+                    return;
+                }
+                galleryDiv.innerHTML = "";
+                for (const nft of nfts) {
+                    const name = nft.name || "Unknown NFT";
+                    let imageUrl = nft.image_url || "https://via.placeholder.com/250";
+                    const tokenId = nft.token_id;
+                    const contractAddress = nft.contract_address;
+                    const openseaUrl = `https://opensea.io/assets/matic/${contractAddress}/${tokenId}`;
+                    const card = document.createElement("div");
+                    card.className = "nft-card";
+                    card.innerHTML = `
+                        <img src="${imageUrl}" alt="${name}">
+                        <h3>${name}</h3>
+                        <p>Token ID: ${tokenId}</p>
+                        <a href="${openseaUrl}" target="_blank">View on OpenSea</a>
+                    `;
+                    galleryDiv.appendChild(card);
+                }
+            } catch (err) {
+                console.error("Error fetching NFTs:", err);
+                galleryDiv.innerHTML = `<p class="error">Error loading NFTs: ${err.message}. Please check the console for more details.</p>`;
+            }
+        }
+        fetchNFTs();
+    </script>
+</body>
+</html>

@@ -22,7 +22,8 @@
     <script>
         const walletAddress = "0xCf974b9e14766f839D8C59bDA1D4Dff3CF3f8b33";
         const contractAddress = "0x72c997ED37F786829F01f6a73B14F6Bdd61c2B94";
-        const apiUrl = `https://api.polygonscan.com/api?module=account&action=tokennfttx&address=${walletAddress}&sort=asc`;
+        const apiKey = "PGGQHQ7EHPRUIBE2H9WW9ZS75KIWCUXZQZ";
+        const apiUrl = `https://api.polygonscan.com/api?module=account&action=tokennfttx&address=${walletAddress}&sort=asc&apikey=${apiKey}`;
 
         async function fetchNFTs() {
             const galleryDiv = document.getElementById("gallery");
@@ -36,7 +37,7 @@
                     galleryDiv.innerHTML = "<p>No NFTs found for this wallet address.</p>";
                     return;
                 }
-                // Group by token ID (only unique NFTs)
+                // Group by token ID (unique NFTs)
                 const tokenMap = new Map();
                 for (const tx of txs) {
                     if (!tokenMap.has(tx.tokenID)) {
