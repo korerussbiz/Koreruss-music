@@ -28,38 +28,31 @@
     <div id="gallery" class="gallery"></div>
 
     <script>
-        // Hardcoded NFT data from your collection (using IPFS gateway)
+        // Hardcoded NFT data from your successful mints (token IDs 4-9)
         const contractAddress = "0x72c997ED37F786829F01f6a73B14F6Bdd61c2B94";
         const nfts = [
-            { tokenId: "4", name: "simple_20260319_112333_20260319_181630_final.mp4", cid: "QmWLMEW6yvnQgG8LPEhJMjz9SNSj4ogdrasa5Sg57HLamz" },
-            { tokenId: "5", name: "simple_20260319_112754_1_20260319_154356_final.mp4", cid: "QmbrAWtLZZjkC6y5TyctsbMvUJuLg4hkJWxcmAVSk4bfkd" },
-            { tokenId: "6", name: "simple_20260319_112754_1_20260319_181616_final.mp4", cid: "QmTECLXtXCEFVBc9PfCntbFCNV9AZZeVuvFmU1S3Xi3WPJ" },
-            { tokenId: "7", name: "simple_20260319_112754_1_20260319_181636_final.mp4", cid: "QmZ1UBuLHXPdFRNP7DZHFoznXbfh3jQywcvTio816B5Bga" },
-            { tokenId: "8", name: "simple_20260319_112333_20260319_181625_final_audio0.mp4", cid: "QmP39gxFn4YyQubgindGdN2gq7m5ugwfzfftHNxeZKbSW1" },
-            { tokenId: "9", name: "simple_20260319_112333_20260319_181625_final_audio0_sepia.mp4", cid: "QmZBphNgjhTLZgH3h9teW23Svx3fQc5sWBXjkVaXEXs9GM" }
+            { tokenId: "4", name: "simple_20260319_112333_20260319_181630_final.mp4", image: "https://ipfs.io/ipfs/QmWLMEW6yvnQgG8LPEhJMjz9SNSj4ogdrasa5Sg57HLamz" },
+            { tokenId: "5", name: "simple_20260319_112754_1_20260319_154356_final.mp4", image: "https://ipfs.io/ipfs/QmbrAWtLZZjkC6y5TyctsbMvUJuLg4hkJWxcmAVSk4bfkd" },
+            { tokenId: "6", name: "simple_20260319_112754_1_20260319_181616_final.mp4", image: "https://ipfs.io/ipfs/QmTECLXtXCEFVBc9PfCntbFCNV9AZZeVuvFmU1S3Xi3WPJ" },
+            { tokenId: "7", name: "simple_20260319_112754_1_20260319_181636_final.mp4", image: "https://ipfs.io/ipfs/QmZ1UBuLHXPdFRNP7DZHFoznXbfh3jQywcvTio816B5Bga" },
+            { tokenId: "8", name: "simple_20260319_112333_20260319_181625_final_audio0.mp4", image: "https://ipfs.io/ipfs/QmP39gxFn4YyQubgindGdN2gq7m5ugwfzfftHNxeZKbSW1" },
+            { tokenId: "9", name: "simple_20260319_112333_20260319_181625_final_audio0_sepia.mp4", image: "https://ipfs.io/ipfs/QmZBphNgjhTLZgH3h9teW23Svx3fQc5sWBXjkVaXEXs9GM" }
         ];
-
-        // Convert CID to IPFS gateway URL
-        function getImageUrl(cid) {
-            return `https://ipfs.io/ipfs/${cid}`;
-        }
 
         const galleryDiv = document.getElementById("gallery");
         for (const nft of nfts) {
-            const imageUrl = getImageUrl(nft.cid);
-            const openseaLink = `https://opensea.io/assets/polygon/${contractAddress}/${nft.tokenId}`;
             const card = document.createElement("div");
             card.className = "nft-card";
             card.innerHTML = `
-                <img src="${imageUrl}" alt="${nft.name}" onerror="this.src='https://via.placeholder.com/250'">
+                <img src="${nft.image}" alt="${nft.name}" onerror="this.src='https://via.placeholder.com/250'">
                 <h3>${nft.name.substring(0, 30)}</h3>
                 <p>Token ID: ${nft.tokenId}</p>
-                <a href="${openseaLink}" target="_blank">View on OpenSea</a>
+                <a href="https://opensea.io/assets/polygon/${contractAddress}/${nft.tokenId}" target="_blank">View on OpenSea</a>
             `;
             galleryDiv.appendChild(card);
         }
 
-        // Wallet connect
+        // Wallet connect (optional)
         let provider, signer;
         const connectBtn = document.getElementById("connectWallet");
         const statusDiv = document.getElementById("wallet-status");
