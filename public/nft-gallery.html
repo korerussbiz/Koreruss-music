@@ -5,104 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
-        h1 { text-align: center; }
-        .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .nft-card { background: white; border-radius: 10px; width: 250px; padding: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .nft-card img { max-width: 100%; border-radius: 8px; max-height: 250px; object-fit: contain; }
-        .nft-card h3 { font-size: 1.1em; margin: 10px 0; }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; text-align: center; }
+        h1 { margin-bottom: 10px; }
+        .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px; }
+        .nft-card { background: white; width: 250px; padding: 10px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .nft-card img { width: 100%; border-radius: 8px; max-height: 250px; object-fit: contain; }
+        .nft-card h3 { font-size: 1em; margin: 10px 0; }
         .nft-card a { display: inline-block; margin-top: 10px; padding: 5px 10px; background: #2081e2; color: white; text-decoration: none; border-radius: 5px; }
-        .nft-card a:hover { background: #0a5cb0; }
-        .error { color: red; text-align: center; margin: 20px; }
-        .ad-banner { background: #e0e0e0; text-align: center; padding: 10px; margin: 20px 0; border-radius: 8px; }
-        .ad-banner img { max-width: 100%; max-height: 90px; }
+        .ad { margin: 30px auto; max-width: 728px; background: #e0e0e0; padding: 15px; border-radius: 8px; }
+        .ad a { color: #2081e2; font-weight: bold; text-decoration: none; }
+        .error { color: red; }
     </style>
 </head>
 <body>
     <h1>Koreruss NFT Collection</h1>
     <div id="gallery" class="gallery">Loading NFTs...</div>
-    <div class="ad-banner">
-        <p>Advertisement</p>
-        <img src="https://via.placeholder.com/728x90?text=Your+Ad+Here" alt="Ad">
+    <div class="ad">
+        🔥 <a href="https://korerussbiz.com/merch" target="_blank">Get your NFT printed on a T‑Shirt! Limited time offer.</a> 🔥
     </div>
     <script>
-        const walletAddress = "0xCf974b9e14766f839D8C59bDA1D4Dff3CF3f8b33";
-        // Try multiple APIs
-        const apis = [
-            `https://api.opensea.io/api/v2/chain/polygon/account/${walletAddress}/nfts?limit=50`,
-            `https://api.covalenthq.com/v1/137/address/${walletAddress}/balances_v2/?nft=true&key=ckey_72cd3b74b4a048c9bc3f4c9929a`
-        ];
-        let apiIndex = 0;
-
-        async function fetchWithCorsProxy(url) {
-            // Use a free CORS proxy if direct fetch fails due to CORS
-            const proxyUrl = `https://cors-anywhere.herokuapp.com/${url}`;
+        async function loadNFTs() {
+            const gallery = document.getElementById('gallery');
             try {
-                const res = await fetch(proxyUrl);
-                return res;
-            } catch (e) {
-                // If proxy fails, try direct (may work on Vercel)
-                return await fetch(url);
-            }
-        }
-
-        async function fetchNFTs() {
-            const galleryDiv = document.getElementById("gallery");
-            for (let i = 0; i < apis.length; i++) {
-                try {
-                    galleryDiv.innerHTML = `Trying API ${i+1}...`;
-                    const url = apis[i];
-                    const response = await fetch(url);
-                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                    const data = await response.json();
-                    let nfts = [];
-                    if (data.nfts) {
-                        nfts = data.nfts;
-                    } else if (data.data && data.data.items) {
-                        nfts = data.data.items.filter(item => item.type === 'nft').map(item => {
-                            const nftData = item.nft_data[0];
-                            return {
-                                name: nftData?.external_data?.name || `Token ${nftData?.token_id}`,
-                                image_url: nftData?.external_data?.image?.replace('ipfs://', 'https://ipfs.io/ipfs/'),
-                                token_id: nftData?.token_id,
-                                contract_address: item.contract_address
-                            };
-                        });
-                    }
-                    if (nfts && nfts.length > 0) {
-                        displayNFTs(nfts);
-                        return;
-                    }
-                } catch (err) {
-                    console.warn(`API ${i+1} failed:`, err);
+                const res = await fetch('/api/nfts');
+                if (!res.ok) throw new Error(await res.text());
+                const { nfts } = await res.json();
+                if (!nfts || nfts.length === 0) {
+                    gallery.innerHTML = '<p>No NFTs found for this wallet.</p>';
+                    return;
                 }
-            }
-            galleryDiv.innerHTML = '<p class="error">Could not load NFTs. Please refresh or try later.</p>';
-        }
-
-        function displayNFTs(nfts) {
-            const galleryDiv = document.getElementById("gallery");
-            galleryDiv.innerHTML = "";
-            for (const nft of nfts) {
-                let name = nft.name || `Token ${nft.token_id}`;
-                let image = nft.image_url || nft.display_image_url || "https://via.placeholder.com/250";
-                if (image && image.startsWith('ipfs://')) image = image.replace('ipfs://', 'https://ipfs.io/ipfs/');
-                const tokenId = nft.token_id;
-                const contract = nft.contract_address || nft.contract;
-                const openseaLink = `https://opensea.io/assets/polygon/${contract}/${tokenId}`;
-                const card = document.createElement("div");
-                card.className = "nft-card";
-                card.innerHTML = `
-                    <img src="${image}" alt="${name}" onerror="this.src='https://via.placeholder.com/250'">
-                    <h3>${name.substring(0, 30)}</h3>
-                    <p>Token ID: ${tokenId}</p>
-                    <a href="${openseaLink}" target="_blank">View on OpenSea</a>
-                `;
-                galleryDiv.appendChild(card);
+                gallery.innerHTML = '';
+                nfts.forEach(nft => {
+                    const card = document.createElement('div');
+                    card.className = 'nft-card';
+                    card.innerHTML = `
+                        <img src="${nft.image || 'https://via.placeholder.com/250'}" alt="${nft.name}">
+                        <h3>${nft.name.substring(0, 30)}</h3>
+                        <p>Token ID: ${nft.tokenId}</p>
+                        <a href="https://opensea.io/assets/polygon/${nft.contract}/${nft.tokenId}" target="_blank">View on OpenSea</a>
+                    `;
+                    gallery.appendChild(card);
+                });
+            } catch (err) {
+                gallery.innerHTML = `<p class="error">Error: ${err.message}</p>`;
             }
         }
-
-        fetchNFTs();
+        loadNFTs();
     </script>
 </body>
 </html>
