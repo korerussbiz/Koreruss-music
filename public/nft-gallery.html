@@ -21,29 +21,27 @@
     <div id="gallery" class="gallery">Loading NFTs...</div>
     <script>
         const walletAddress = "0xCf974b9e14766f839D8C59bDA1D4Dff3CF3f8b33";
-        const INFURA_PROJECT_ID = "9aa3d95b3bc440fa88ea12eaa4456161";
-        const apiUrl = `https://nft.api.infura.io/networks/polygon-mainnet/accounts/${walletAddress}/assets/nfts`;
+        // OpenSea public API (no API key required)
+        const apiUrl = `https://api.opensea.io/api/v2/chain/polygon/account/${walletAddress}/nfts`;
 
         async function fetchNFTs() {
             const galleryDiv = document.getElementById("gallery");
             try {
-                const response = await fetch(apiUrl, {
-                    headers: { 'Authorization': `Bearer ${INFURA_PROJECT_ID}` }
-                });
-                if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const data = await response.json();
-                const nfts = data.assets;
+                const nfts = data.nfts;
                 if (!nfts || nfts.length === 0) {
                     galleryDiv.innerHTML = "<p>No NFTs found for this wallet address.</p>";
                     return;
                 }
                 galleryDiv.innerHTML = "";
                 for (const nft of nfts) {
-                    const name = nft.name || `Token ${nft.token_id}`;
-                    let imageUrl = nft.image_url || "https://via.placeholder.com/250";
-                    const tokenId = nft.token_id;
-                    const contractAddress = nft.contract_address;
-                    const openseaUrl = `https://opensea.io/assets/matic/${contractAddress}/${tokenId}`;
+                    const name = nft.name || nft.collection?.name || "Unknown NFT";
+                    let imageUrl = nft.display_image_url || nft.image_url || "https://via.placeholder.com/250";
+                    const tokenId = nft.identifier;
+                    const contractAddress = nft.contract;
+                    const openseaUrl = `https://opensea.io/assets/polygon/${contractAddress}/${tokenId}`;
                     const card = document.createElement("div");
                     card.className = "nft-card";
                     card.innerHTML = `
@@ -55,7 +53,7 @@
                     galleryDiv.appendChild(card);
                 }
             } catch (err) {
-                console.error("Error fetching NFTs:", err);
+                console.error(err);
                 galleryDiv.innerHTML = `<p class="error">Error loading NFTs: ${err.message}</p>`;
             }
         }
