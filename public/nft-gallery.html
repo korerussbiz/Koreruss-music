@@ -22,29 +22,25 @@
     <script>
         const walletAddress = "0xCf974b9e14766f839D8C59bDA1D4Dff3CF3f8b33";
         const chain = "polygon";
-        const moralisApiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImZlN2I4NDYwLTJkOTUtNGVkZC1iMTdhLWI3MjYzMGRmOTQ4MyIsIm9yZ0lkIjoiNTA5MjE4IiwidXNlcklkIjoiNTIzOTM0IiwidHlwZUlkIjoiNjk3OTk4NWEtNjAzMy00MDU4LTk5N2UtNzhlNmVkODhiYWRmIiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3NzU5MjgyMjcsImV4cCI6NDkzMTY4ODIyN30.9o7JnlJUjcgmJNFrZVK7_4VUd-EmlpS61njbzDRARfE";
+        const apiUrl = `https://api.opensea.io/api/v2/chain/${chain}/account/${walletAddress}/nfts`;
 
         async function fetchNFTs() {
             const galleryDiv = document.getElementById("gallery");
             try {
-                const url = `https://deep-index.moralis.io/api/v2/${walletAddress}/nft?chain=${chain}&format=decimal&limit=100`;
-                const response = await fetch(url, {
-                    headers: { 'X-API-Key': moralisApiKey, 'Accept': 'application/json' }
-                });
+                const response = await fetch(apiUrl);
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const data = await response.json();
-                if (!data.result || data.result.length === 0) {
+                const nfts = data.nfts;
+                if (!nfts || nfts.length === 0) {
                     galleryDiv.innerHTML = "<p>No NFTs found for this wallet address.</p>";
                     return;
                 }
                 galleryDiv.innerHTML = "";
-                for (const nft of data.result) {
-                    const name = nft.name || nft.token_address || "Unknown NFT";
-                    let imageUrl = nft.normalized_metadata?.image || nft.metadata?.image;
-                    if (imageUrl && imageUrl.startsWith('ipfs://')) imageUrl = imageUrl.replace('ipfs://', 'https://ipfs.io/ipfs/');
-                    if (!imageUrl) imageUrl = "https://via.placeholder.com/250";
-                    const tokenId = nft.token_id;
-                    const contractAddress = nft.token_address;
+                for (const nft of nfts) {
+                    const name = nft.name || nft.collection?.name || "Unknown NFT";
+                    let imageUrl = nft.display_image_url || nft.image_url || "https://via.placeholder.com/250";
+                    const tokenId = nft.identifier;
+                    const contractAddress = nft.contract;
                     const openseaUrl = `https://opensea.io/assets/${chain}/${contractAddress}/${tokenId}`;
                     const card = document.createElement("div");
                     card.className = "nft-card";
@@ -57,6 +53,7 @@
                     galleryDiv.appendChild(card);
                 }
             } catch (err) {
+                console.error(err);
                 galleryDiv.innerHTML = `<p class="error">Error loading NFTs: ${err.message}</p>`;
             }
         }
