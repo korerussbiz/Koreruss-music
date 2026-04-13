@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Koreruss NFT Gallery</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        h1 { text-align: center; }
+        .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .nft-card { background: white; border-radius: 10px; width: 250px; padding: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .nft-card img { max-width: 100%; border-radius: 8px; max-height: 250px; object-fit: contain; }
+        .nft-card h3 { font-size: 1.1em; margin: 10px 0; }
+        .nft-card a { display: inline-block; margin-top: 10px; padding: 5px 10px; background: #2081e2; color: white; text-decoration: none; border-radius: 5px; }
+        .nft-card a:hover { background: #0a5cb0; }
+        button { padding: 10px 20px; background: #4caf50; color: white; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
+        button:hover { background: #45a049; }
+        #wallet-status { text-align: center; margin-bottom: 20px; font-weight: bold; }
+        .error { color: red; text-align: center; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+</head>
+<body>
+    <h1>Koreruss NFT Collection</h1>
+    <div style="text-align: center;">
+        <button id="connectWallet">Connect Wallet</button>
+        <div id="wallet-status"></div>
+    </div>
+    <div id="gallery" class="gallery">Loading NFTs...</div>
+
+    <script>
+        const walletAddress = "0xCf974b9e14766f839D8C59bDA1D4Dff3CF3f8b33";
+        const contractAddress = "0x72c997ED37F786829F01f6a73B14F6Bdd61c2B94";
+        const apiUrl = `https://api.opensea.io/api/v2/chain/polygon/account/${walletAddress}/nfts?limit=50`;
+
+        async function fetchAndDisplay() {
+            const galleryDiv = document.getElementById("gallery");
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+                const nfts = data.nfts;
+                if (!nfts || nfts.length === 0) {
+                    galleryDiv.innerHTML = "<p>No NFTs found.</p>";
+                    return;
+                }
+                galleryDiv.innerHTML = "";
+                for (const nft of nfts) {
+                    const name = nft.name || `Token #${nft.identifier}`;
+                    const imageUrl = nft.display_image_url || nft.image_url || "https://via.placeholder.com/250";
+                    const tokenId = nft.identifier;
+                    const openseaLink = `https://opensea.io/assets/polygon/${contractAddress}/${tokenId}`;
+                    const card = document.createElement("div");
+                    card.className = "nft-card";
+                    card.innerHTML = `
+                        <img src="${imageUrl}" alt="${name}" onerror="this.src='https://via.placeholder.com/250'">
+                        <h3>${name.substring(0, 30)}</h3>
+                        <p>Token ID: ${tokenId}</p>
+                        <a href="${openseaLink}" target="_blank">View on OpenSea</a>
+                    `;
+                    galleryDiv.appendChild(card);
+                }
+            } catch (err) {
+                galleryDiv.innerHTML = `<p class="error">Error: ${err.message}</p>`;
+            }
+        }
+        fetchAndDisplay();
+
+        // Wallet connect
+        let provider, signer;
+        const connectBtn = document.getElementById("connectWallet");
+        const statusDiv = document.getElementById("wallet-status");
+        connectBtn.onclick = async () => {
+            if (window.ethereum) {
+                try {
+                    provider = new ethers.BrowserProvider(window.ethereum);
+                    await provider.send("eth_requestAccounts", []);
+                    signer = await provider.getSigner();
+                    const address = await signer.getAddress();
+                    statusDiv.innerHTML = `✅ Connected: ${address.substring(0,6)}...${address.substring(38)}`;
+                    connectBtn.disabled = true;
+                } catch (err) {
+                    statusDiv.innerHTML = "❌ Connection failed: " + err.message;
+                }
+            } else {
+                statusDiv.innerHTML = "❌ Please install MetaMask.";
+            }
+        };
+    </script>
+</body>
+</html>

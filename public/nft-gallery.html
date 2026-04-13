@@ -61,7 +61,6 @@
             `;
             galleryDiv.appendChild(card);
 
-            // Insert an ad after every 3 NFTs (but not after the last one)
             if ((i + 1) % 3 === 0 && i !== nfts.length - 1) {
                 const adDiv = document.createElement("div");
                 adDiv.className = "ad-container";
@@ -78,7 +77,6 @@
             }
         }
 
-        // Wallet connect
         let provider, signer;
         const connectBtn = document.getElementById("connectWallet");
         const statusDiv = document.getElementById("wallet-status");
