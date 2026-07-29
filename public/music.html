@@ -18,36 +18,13 @@
 <body>
     <h1>🎵 Koreruss Music</h1>
     <p>Stream and download my tracks. If you enjoy the music, consider sending a tip via Solana Pay!</p>
-
     <div id="song-list">
-        <!-- Songs will be listed here by JavaScript -->
+        
     </div>
-
     <div class="donate">
         <h3>❤️ Support My Music</h3>
         <p>Send any amount of SOL to support my work:</p>
         <a class="solana-pay" href="solana:9vXyKbMr85Yaus38RQnjLjfxPWbCJVESbTmRH6JCWVE2?amount=0.01&label=Koreruss+Music+Support&message=Thanks+for+your+support!">Donate with Solana Pay</a>
     </div>
-
-    <script>
-        fetch('/music/list.json')
-            .then(response => response.json())
-            .then(files => {
-                const list = document.getElementById('song-list');
-                files.forEach(file => {
-                    const div = document.createElement('div');
-                    div.className = 'song';
-                    div.innerHTML = `
-                        <strong>${file.name}</strong>
-                        <audio controls src="/music/${file.name}"></audio>
-                        <br><a href="/music/${file.name}" download>Download</a>
-                    `;
-                    list.appendChild(div);
-                });
-            });
-
-        document.querySelector('.solana-pay').href = 
-            document.querySelector('.solana-pay').href.replace('9vXyKbMr85Yaus38RQnjLjfxPWbCJVESbTmRH6JCWVE2', '${9vXyKbMr85Yaus38RQnjLjfxPWbCJVESbTmRH6JCWVE2}');
-    </script>
 </body>
 </html>
