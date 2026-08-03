@@ -1,3 +1,172 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Korerussbiz Store</title></head><body>
-<h1>Store page will be built next</h1>
-</body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Korerussbiz Services & Store</title>
+  <style>
+    :root { --bg:#0a0a0a; --surface:#1a1a1a; --primary:#f7931a; --accent:#9945FF; --text:#e0e0e0; --muted:#888; --border:#2a2a2a; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; }
+    a { color:var(--primary); text-decoration:none; }
+    nav { position:sticky; top:0; background:var(--surface); border-bottom:1px solid var(--border); padding:12px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; z-index:1000; }
+    nav .logo { font-size:1.3em; font-weight:700; color:var(--primary); }
+    nav .links { display:flex; gap:15px; flex-wrap:wrap; }
+    nav .links a { color:var(--text); font-size:0.9em; }
+    .hero { text-align:center; padding:60px 20px 40px; background:linear-gradient(135deg, #1a1a2e, #0a0a0a); }
+    .hero h1 { font-size:2.5em; background:linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    section { max-width:1100px; margin:40px auto; padding:0 20px; }
+    .section-title { font-size:1.8em; color:#fff; border-bottom:2px solid var(--primary); display:inline-block; padding-bottom:5px; margin-bottom:20px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; }
+    .card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px; }
+    .card:hover { border-color:var(--primary); }
+    .price { color:var(--accent); font-weight:bold; margin:10px 0; font-size:1.3em; }
+    .addr { word-break:break-all; font-size:0.85em; background:#000; padding:8px; border-radius:5px; margin-top:8px; }
+    .btn { display:inline-block; padding:10px 20px; border-radius:30px; font-weight:600; margin:5px; transition:0.3s; }
+    .btn-primary { background:var(--primary); color:#000; }
+    .btn-accent { background:var(--accent); color:#fff; }
+    .btn-outline { border:2px solid var(--primary); color:var(--primary); }
+    footer { background:var(--surface); border-top:1px solid var(--border); padding:30px 20px; text-align:center; color:var(--muted); margin-top:40px; }
+    .sold-out { background: #ff4444; cursor: not-allowed; opacity: 0.7; }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="logo">⚡ Korerussbiz</div>
+  <div class="links">
+    <a href="/">Home</a>
+    <a href="/services.html">🛒 Store</a>
+    <a href="/pay.html">💳 Pay with Crypto</a>
+  </div>
+</nav>
+<div class="hero">
+  <h1>Music Production Services & Store</h1>
+  <p>Buy beats, commission tracks, collect NFTs, and get custom trading tools.</p>
+  <a href="#nfts" class="btn btn-accent">🖼️ $0.25 NFTs</a>
+  <a href="#beats" class="btn btn-primary">🎵 Buy Beats</a>
+  <a href="#commission" class="btn btn-outline">✍️ Commission a Track</a>
+</div>
+
+<!-- NFT Section - CHEAP $0.25 -->
+<section id="nfts">
+  <h2 class="section-title">🖼️ NFT Art Collection – from $0.25</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Koreruss NFT #1</h3>
+      <p>Original music-inspired digital art on Polygon.</p>
+      <p class="price">$0.25 USD or any crypto</p>
+      <p><small>Contract: 0x72c997ED37F786829F01f6a73B14F6Bdd61c2B94</small></p>
+      <a href="https://www.paypal.me/KoreyRussell809/0.25" class="btn btn-primary">Buy with PayPal</a>
+      <a href="https://opensea.io/assets/polygon/0x72c997ED37F786829F01f6a73B14F6Bdd61c2B94" class="btn btn-outline">View on OpenSea</a>
+    </div>
+    <div class="card">
+      <h3>Koreruss NFT #2</h3>
+      <p>Unique collectible from my music collection.</p>
+      <p class="price">$0.25 USD or any crypto</p>
+      <a href="https://www.paypal.me/KoreyRussell809/0.25" class="btn btn-primary">Buy with PayPal</a>
+      <a href="https://opensea.io/assets/polygon/0x72c997ED37F786829F01f6a73B14F6Bdd61c2B94" class="btn btn-outline">View on OpenSea</a>
+    </div>
+    <div class="card">
+      <h3>Koreruss NFT #3</h3>
+      <p>Exclusive artwork for music lovers.</p>
+      <p class="price">$0.25 USD or any crypto</p>
+      <a href="https://www.paypal.me/KoreyRussell809/0.25" class="btn btn-primary">Buy with PayPal</a>
+      <a href="https://opensea.io/assets/polygon/0x72c997ED37F786829F01f6a73B14F6Bdd61c2B94" class="btn btn-outline">View on OpenSea</a>
+    </div>
+    <div class="card">
+      <h3>Custom Music NFT</h3>
+      <p>Get your own track minted as an NFT. Starting at just $5.</p>
+      <p class="price">Starting at $5.00</p>
+      <a href="mailto:korerussbiz@gmail.com?subject=Custom%20NFT" class="btn btn-accent">Order Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- Buy Beats Section -->
+<section id="beats">
+  <h2 class="section-title">🎵 Buy Beats (Licenses)</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Basic Lease</h3>
+      <p>MP3, 10k streams, non-exclusive</p>
+      <p class="price">$4.99</p>
+      <a href="https://www.paypal.me/KoreyRussell809/4.99" class="btn btn-primary">Buy Now</a>
+    </div>
+    <div class="card">
+      <h3>Premium Lease</h3>
+      <p>WAV + MP3, 100k streams</p>
+      <p class="price">$19.99</p>
+      <a href="https://www.paypal.me/KoreyRussell809/19.99" class="btn btn-primary">Buy Now</a>
+    </div>
+    <div class="card">
+      <h3>Exclusive Rights</h3>
+      <p>Full ownership, stems included</p>
+      <p class="price">$199.99</p>
+      <a href="https://www.paypal.me/KoreyRussell809/199.99" class="btn btn-accent">Buy Now</a>
+    </div>
+    <div class="card">
+      <h3>Custom Beat</h3>
+      <p>Tailor-made beat for your project</p>
+      <p class="price">Starting at $50</p>
+      <a href="mailto:korerussbiz@gmail.com?subject=Custom%20Beat%20Request" class="btn btn-outline">Contact</a>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:20px;">🎧 Stream 203 beats: 
+    <iframe src="https://files.fm/gallery_module/v1/iframe/list/?hash=wwtzv4cfp7&view=horizontal&order_by=date_created&order_dir=desc" height="100" width="100%" style="border:none;max-width:650px;"></iframe>
+  </p>
+</section>
+
+<!-- Commission a Track -->
+<section id="commission">
+  <h2 class="section-title">✍️ Commission a Track</h2>
+  <div class="card" style="max-width:600px;margin:0 auto;">
+    <p>Need a custom instrumental, full production, or mixing/mastering? I'll create a track tailored to your style and needs. Prices start at <strong>$50</strong> for a basic beat, up to <strong>$500</strong> for full production with vocals.</p>
+    <p>Email me at <a href="mailto:korerussbiz@gmail.com">korerussbiz@gmail.com</a> with your requirements, or use the button below:</p>
+    <a href="mailto:korerussbiz@gmail.com?subject=Commission%20Request" class="btn btn-accent">Request a Quote</a>
+  </div>
+</section>
+
+<!-- Trading Tools (your scripts) -->
+<section id="tools">
+  <h2 class="section-title">📈 Trading & Automation Tools</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>BSC Momentum Scanner</h3>
+      <p>Live token scanner for BSC. Full source code.</p>
+      <p class="price">$9.99</p>
+      <a href="https://www.paypal.me/KoreyRussell809/9.99" class="btn btn-primary">Buy Now</a>
+      <a href="https://github.com/korerussbiz/koreruss-music/blob/main/bsc_scanner.py" class="btn btn-outline">View Code</a>
+    </div>
+    <div class="card">
+      <h3>Solana Token Hunter</h3>
+      <p>Recover lost SPL tokens. Full script.</p>
+      <p class="price">$9.99</p>
+      <a href="https://www.paypal.me/KoreyRussell809/9.99" class="btn btn-primary">Buy Now</a>
+      <a href="https://github.com/korerussbiz/koreruss-music" class="btn btn-outline">View Code</a>
+    </div>
+    <div class="card">
+      <h3>AI Trading Assistant</h3>
+      <p>Mistral/Ollama CLI for market analysis.</p>
+      <p class="price">$4.99</p>
+      <a href="https://www.paypal.me/KoreyRussell809/4.99" class="btn btn-primary">Buy Now</a>
+      <a href="https://github.com/korerussbiz/koreruss-music" class="btn btn-outline">View Code</a>
+    </div>
+  </div>
+</section>
+
+<!-- Crypto Payments -->
+<section id="crypto">
+  <h2 class="section-title">💰 Pay with Crypto</h2>
+  <div class="grid">
+    <div class="card"><h3>BTC</h3><p class="addr">bc1qh6m2xe7tj86z9e37y0828l7fj5fvnw4d0k0lp2</p></div>
+    <div class="card"><h3>ETH/EVM</h3><p class="addr">0xCf974b9e14766f839D8C59bDA1D4Dff3CF3f8b33</p></div>
+    <div class="card"><h3>SOL</h3><p class="addr">9vXyKbMr85Yaus38RQnjLjfxPWbCJVESbTmRH6JCWVE2</p></div>
+    <div class="card"><h3>LTC</h3><p class="addr">ltc1qdpz43dtdk79ne5en2r8mdu05cnfelpwk8zxlgu</p></div>
+    <div class="card"><h3>DOGE</h3><p class="addr">DEeRtVLVgSeA5njHQsx4ySnQSHWWnyvAsp</p></div>
+    <div class="card"><h3>XMR</h3><p class="addr">48edfHu7V9Z84YzzMa6fUueoELZ9ZRXq9VetWzYGzKt52XU5xvqgzYnDK9URnRoJMk1j8nLwEVsaSWJ4fhdUyZijBGUicoD</p></div>
+  </div>
+</section>
+
+<footer><p>© 2026 Korerussbiz | BMI Member | Crypto Entrepreneur</p></footer>
+</body>
+</html>
