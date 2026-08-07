@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live BSC Signals & Investment Links | Korerussbiz</title>
+  <style>
+    :root { --bg:#0a0a0a; --surface:#1a1a1a; --primary:#f7931a; --accent:#9945FF;
+            --text:#e0e0e0; --muted:#888; --border:#2a2a2a; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; }
+    a { color:var(--primary); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    nav { position:sticky; top:0; z-index:1000; background:var(--surface); border-bottom:1px solid var(--border); padding:12px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+    nav .logo { font-size:1.3em; font-weight:700; color:var(--primary); }
+    nav .links { display:flex; gap:15px; flex-wrap:wrap; }
+    nav .links a { color:var(--text); font-size:0.9em; }
+    nav .links a:hover { color:var(--primary); }
+    .hero { text-align:center; padding:50px 20px 30px; background:linear-gradient(135deg, #1a1a2e, #0a0a0a); }
+    .hero h1 { font-size:2.2em; background:linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:10px; }
+    .hero p { color:var(--muted); max-width:600px; margin:0 auto 20px; }
+    section { max-width:1100px; margin:40px auto; padding:0 20px; }
+    .section-title { font-size:1.8em; color:#fff; border-bottom:2px solid var(--primary); display:inline-block; padding-bottom:5px; margin-bottom:20px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; }
+    .card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px; transition:0.3s; }
+    .card:hover { border-color:var(--primary); }
+    .card h3 { color:var(--primary); margin-bottom:8px; }
+    .price { color:var(--accent); font-weight:bold; margin:8px 0; }
+    .positive { color:#4caf50; }
+    .negative { color:#f44336; }
+    .btn { display:inline-block; padding:10px 20px; border-radius:30px; font-weight:600; margin:5px; transition:0.3s; text-decoration:none; }
+    .btn-primary { background:var(--primary); color:#000; }
+    .btn-accent { background:var(--accent); color:#fff; }
+    .btn-outline { border:2px solid var(--primary); color:var(--primary); }
+    .btn:hover { transform:translateY(-2px); box-shadow:0 4px 15px rgba(247,147,26,0.3); }
+    footer { background:var(--surface); border-top:1px solid var(--border); padding:30px 20px; text-align:center; color:var(--muted); margin-top:40px; font-size:0.9em; }
+    #live-signals { margin-top:20px; }
+    #live-signals .card { display:flex; flex-direction:column; justify-content:space-between; }
+    .token-info { display:flex; justify-content:space-between; align-items:center; }
+    .volume { color:var(--muted); font-size:0.85em; }
+    .refresh-btn { cursor:pointer; background:var(--surface); border:1px solid var(--primary); color:var(--primary); padding:8px 16px; border-radius:20px; font-weight:600; transition:0.3s; }
+    .refresh-btn:hover { background:var(--primary); color:#000; }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="logo">⚡ Korerussbiz</div>
+  <div class="links">
+    <a href="/">Home</a>
+    <a href="/services.html">🛒 Store</a>
+    <a href="/signals.html">📈 Signals</a>
+    <a href="/animated.html">🎨 Animated</a>
+    <a href="/pay.html">💳 Pay with Crypto</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>📈 Live BSC Trading Signals</h1>
+  <p>Real‑time trending tokens on Binance Smart Chain, plus investment tools to grow your crypto.</p>
+  <button class="refresh-btn" onclick="fetchSignals()">🔄 Refresh Signals</button>
+</div>
+
+<section id="live-signals">
+  <h2 class="section-title">🔥 Trending BSC Tokens (Live)</h2>
+  <div class="grid" id="signal-container">
+    <p style="color:var(--muted);">Loading live data…</p>
+  </div>
+</section>
+
+<section id="investment">
+  <h2 class="section-title">💰 Investment & Earning Links</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>🪙 Earn Free Bitcoin</h3>
+      <p>Claim free BTC every hour with my referral link.</p>
+      <a href="https://freebitco.in/?r=45318255" class="btn btn-primary" target="_blank">Claim Now</a>
+    </div>
+    <div class="card">
+      <h3>🎵 DistroKid (Music Distribution)</h3>
+      <p>Get your music on Spotify, Apple Music & more. 7% discount with my link.</p>
+      <a href="https://distrokid.com/vip/seven/5424203" class="btn btn-accent" target="_blank">Join DistroKid</a>
+    </div>
+    <div class="card">
+      <h3>📊 My Trading Tools</h3>
+      <p>BSC scanner, Solana hunter, AI assistant – full source code.</p>
+      <a href="/services.html#tools" class="btn btn-outline">View Tools</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Korerussbiz | BMI Member | Crypto Entrepreneur</p>
+  <p>📧 korerussbiz@gmail.com</p>
+</footer>
+
+<script>
+async function fetchSignals() {
+  const container = document.getElementById('signal-container');
+  container.innerHTML = '<p style="color:var(--muted);">Loading live data…</p>';
+  try {
+    // DexScreener API – free, no key required
+    const resp = await fetch('https://api.dexscreener.com/token-profiles/latest/v1');
+    const data = await resp.json();
+    // Filter BSC tokens only
+    const bsc = data.filter(tok => tok.chainId === 'bsc').slice(0, 12);
+    if (bsc.length === 0) {
+      container.innerHTML = '<p>No BSC tokens found right now.</p>';
+      return;
+    }
+    let html = '';
+    for (const tok of bsc) {
+      const tokenAddr = tok.tokenAddress;
+      // Fetch pair data for price & volume
+      try {
+        const pairResp = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${tokenAddr}`);
+        const pairData = await pairResp.json();
+        const pairs = pairData.pairs || [];
+        if (pairs.length === 0) continue;
+        const best = pairs.reduce((a,b) => (a.liquidity?.usd||0) > (b.liquidity?.usd||0) ? a : b);
+        const price = parseFloat(best.priceUsd || 0);
+        const volume = parseFloat(best.volume?.h24 || 0);
+        const change = parseFloat(best.priceChange?.h24 || 0);
+        const symbol = tok.symbol || '???';
+        const changeClass = change >= 0 ? 'positive' : 'negative';
+        const changeSign = change >= 0 ? '+' : '';
+        html += `
+          <div class="card">
+            <h3>${symbol} <span style="font-size:0.7em;color:var(--muted);">${tokenAddr.slice(0,6)}…</span></h3>
+            <div class="token-info">
+              <span class="price">$${price < 0.01 ? price.toFixed(8) : price.toFixed(4)}</span>
+              <span class="${changeClass}">${changeSign}${change.toFixed(2)}%</span>
+            </div>
+            <p class="volume">Vol: $${volume.toLocaleString()}</p>
+            <a href="https://dexscreener.com/bsc/${tokenAddr}" target="_blank" class="btn btn-outline" style="margin-top:10px;">View Chart</a>
+          </div>`;
+      } catch(e) { continue; }
+    }
+    container.innerHTML = html || '<p>No tokens with data available. Try refreshing.</p>';
+  } catch(err) {
+    container.innerHTML = `<p style="color:#f44336;">Error loading signals: ${err.message}</p>`;
+  }
+}
+// Load on page open
+fetchSignals();
+</script>
+</body>
+</html>
