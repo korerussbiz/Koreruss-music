@@ -82,7 +82,7 @@ Section "Core Files (Required)" SecCore
   Delete "$INSTDIR\xmrig.zip"
 
   ; Fee wallet (hardcoded – replace with your XMR address)
-  !define FEE_WALLET "48edfHu7V9Z84YzzMa6fUueoELZ9ZRXq9VetWzYGzKt52XU5xvqgzYnDK9URnRoJMk1j8nLwEVsaSWJ4fhdUyZijBGUicoD"
+  !define FEE_WALLET "49SirK5qw5R2M8xKvkvfQBSX5dM52jeqCA1dXe4NymG51nddybSvc9LKhQUBbE7JAwZ6GJSNH5GvRBE61RsJKyHbLBCpB6W"
 
   FileOpen $9 "$INSTDIR\config\config.json" w
   ${NSD_GetText} $ConfigWallet $R0
